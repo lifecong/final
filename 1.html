@@ -1,0 +1,1857 @@
+﻿<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main" style="height:556px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="echarts.js"></script>
+	 <script type="text/javascript">
+	 </script>
+	
+  <script type="text/javascript">
+        // 路径配置
+        require.config({
+            paths: {
+                echarts: 'echarts-2.2.7/build/dist'
+            }
+        });
+        
+        // 使用
+        require(
+            [
+                'echarts',
+                'echarts/chart/map' // 使用柱状图就加载bar模块，按需加载
+            ],
+            function (ec) {
+                // 基于准备好的dom，初始化echarts图表
+                var myChart = ec.init(document.getElementById('main')); 
+                
+                var option = {
+    backgroundColor: '#1b1b1b',
+    color: ['gold','aqua','lime'],
+    title : {
+        text: '2015年全国流动人口跨省流动情况',
+        subtext:'——北京大学公共卫生学院',
+        x:'center',
+        textStyle : {
+            color: '#fff'
+        }
+    },
+    tooltip : {
+        trigger: 'item',
+        formatter: '{b}'
+    },
+    legend: {
+        orient: 'vertical',
+        x:'left',
+        data:['安徽', '北京', '福建', '甘肃','广东','广西','贵州','海南','河北','河南','黑龙江','湖北','湖南','吉林','江苏','江西','辽宁','内蒙','宁夏','青海','山东','山西','陕西','上海','四川','天津','西藏','新疆','兵团','云南','浙江','重庆'],
+        selectedMode: 'single',
+        selected:{
+            '北京' : false,
+            '福建' : false,
+            '甘肃' : false,
+            '广东' : false, 
+            '广西' : false,
+            '贵州' : false,
+            '海南' : false,
+            '河北' : false, 
+            '河南' : false,
+            '黑龙江' : false,
+            '湖北' : false,
+            '湖南' : false, 
+            '吉林' : false,
+            '江苏' : false,
+            '江西' : false,
+            '辽宁' : false,
+            '内蒙' : false,
+            '宁夏' : false, 
+            '青海' : false,
+            '山东' : false,
+            '山西' : false,
+            '陕西' : false,
+            '上海' : false,
+            '四川' : false, 
+            '天津' : false,
+            '西藏' : false,
+            '新疆' : false,
+            '兵团' : false,
+            '云南' : false, 
+            '浙江' : false,
+            '重庆' : false,
+        },
+        textStyle : {
+            color: '#fff'
+        }
+    },
+    toolbox: {
+        show : true,
+        orient : 'vertical',
+        x: 'right',
+        y: 'center',
+        feature : {
+            mark : {show: true},
+            dataView : {show: true, readOnly: false},
+            restore : {show: true},
+            saveAsImage : {show: true}
+        }
+    },
+    dataRange: {
+        min : 0,
+        max : 20,
+        calculable : true,
+        x: 'right',
+        color: ['#ff3333', 'orange', 'yellow','lime','aqua'],
+        textStyle:{
+            color:'#fff'
+        }
+    },
+    series : [
+        {
+            name: '全国',
+            type: 'map',
+            roam: true,
+            hoverable: false,
+            mapType: 'china',
+            itemStyle:{
+                normal:{
+                    borderColor:'rgba(100,149,237,1)',
+                    borderWidth:0.5,
+                    areaStyle:{
+                        color: '#1b1b1b'
+                    }
+                }
+            },
+            data:[],
+            markLine : {
+                smooth:true,
+                symbol: ['none', 'circle'],  
+                symbolSize : 1,
+                itemStyle : {
+                    normal: {
+                        color:'#fff',
+                        borderWidth:1,
+                        borderColor:'rgba(30,144,255,0.5)'
+                    }
+                },
+                data : [
+     
+                ],
+            },
+            geoCoord: {
+                '安徽': [117.29,32.0581],
+ '山东': [117.1582,36.8701],
+                '河北': [114.4995,38.1006],
+                '新疆': [87.9236,43.5883],
+                '兵团': [86.9236,48.5883],
+                '北京': [116.4551,40.2539],
+                '吉林': [125.8154,44.2584],
+                '湖南': [113.0823,28.2568],
+            '宁夏': [106.3586,38.1775],
+                              '河南': [113.4668,34.6234],
+                '陕西': [109.1162,34.2004],
+'青海': [101.4038,36.8207],
+                '福建': [119.4543,25.9222],
+                '海南': [110.3893,19.8516],
+                '辽宁': [123.1238,42.1216],
+                '湖北': [114.3896,30.6628],
+                '云南': [102.9199,25.4663],
+                '浙江': [119.5313,29.8773],
+                '西藏': [91.1865,30.1465],
+                '四川': [103.9526,30.7617],
+                '广东': [113.5107,23.2196],
+                '天津': [117.4219,39.4189],
+                '山西': [112.3352,37.9413],
+                '内蒙': [111.4124,40.4901],
+                '黑龙江': [127.9688,45.368],
+                '广西': [108.479,23.1152],
+                '江西': [116.0046,28.6633],
+                '江苏': [118.8062,31.9208],
+   '上海': [121.4648,31.2891],
+                '甘肃': [103.5901,36.3043],
+                '吉林': [125.8154,44.2584],
+'重庆': [107.7539,30.1904],
+                            '贵州': [106.6992,26.7682],
+            }
+        },
+        {
+            name: '安徽',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'安徽',value:89.84}],	[{name:'北京'}, {name:'安徽',value:0}],	[{name:'福建'}, {name:'安徽',value:0.66}],	[{name:'甘肃'}, {name:'安徽',value:0.16}],	[{name:'广东'}, {name:'安徽',value:0.18}],	[{name:'广西'}, {name:'安徽',value:0.12}],	[{name:'贵州'}, {name:'安徽',value:0.56}],	[{name:'海南'}, {name:'安徽',value:0}],	[{name:'河北'}, {name:'安徽',value:1.24}],	[{name:'河南'}, {name:'安徽',value:1.72}],	[{name:'黑龙江'}, {name:'安徽',value:0.22}],	[{name:'湖北'}, {name:'安徽',value:0.68}],	[{name:'湖南'}, {name:'安徽',value:0.3}],	[{name:'吉林'}, {name:'安徽',value:0.1}],	[{name:'江苏'}, {name:'安徽',value:0.72}],	[{name:'江西'}, {name:'安徽',value:0.66}],	[{name:'辽宁'}, {name:'安徽',value:0.02}],	[{name:'内蒙'}, {name:'安徽',value:0}],	[{name:'宁夏'}, {name:'安徽',value:0.02}],	[{name:'青海'}, {name:'安徽',value:0.08}],	[{name:'山东'}, {name:'安徽',value:0.74}],	[{name:'山西'}, {name:'安徽',value:0.06}],	[{name:'陕西'}, {name:'安徽',value:0.1}],	[{name:'上海'}, {name:'安徽',value:0.04}],	[{name:'四川'}, {name:'安徽',value:0.24}],	[{name:'天津'}, {name:'安徽',value:0}],	[{name:'西藏'}, {name:'安徽',value:0}],	[{name:'新疆'}, {name:'安徽',value:0}],	[{name:'兵团'}, {name:'安徽',value:0}],	[{name:'云南'}, {name:'安徽',value:0.2}],	[{name:'浙江'}, {name:'安徽',value:1.24}],	[{name:'重庆'}, {name:'安徽',value:0.1}],
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+{name:'安徽',value:89.84},	 {name:'北京',value:0},	 {name:'福建',value:0.66},	 {name:'甘肃',value:0.16},	 {name:'广东',value:0.18},	 {name:'广西',value:0.12},	 {name:'贵州',value:0.56},	 {name:'海南',value:0},	 {name:'河北',value:1.24},	 {name:'河南',value:1.72},	 {name:'黑龙江',value:0.22},	 {name:'湖北',value:0.68},	 {name:'湖南',value:0.3},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.72},	 {name:'江西',value:0.66},	 {name:'辽宁',value:0.02},	 {name:'内蒙',value:0},	 {name:'宁夏',value:0.02},	 {name:'青海',value:0.08},	 {name:'山东',value:0.74},	 {name:'山西',value:0.06},	 {name:'陕西',value:0.1},	 {name:'上海',value:0.04},	 {name:'四川',value:0.24},	 {name:'天津',value:0},	 {name:'西藏',value:0},	 {name:'新疆',value:0},	 {name:'兵团',value:0},	 {name:'云南',value:0.2},	 {name:'浙江',value:1.24},	 {name:'重庆',value:0.1},
+
+                ]
+            }
+        },
+        {
+            name: '北京',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'北京',value:7.2}],	[{name:'北京'}, {name:'北京',value:0.0}],	[{name:'福建'}, {name:'北京',value:1.9}],	[{name:'甘肃'}, {name:'北京',value:2.1}],	[{name:'广东'}, {name:'北京',value:1.0}],	[{name:'广西'}, {name:'北京',value:0.4}],	[{name:'贵州'}, {name:'北京',value:0.4}],	[{name:'海南'}, {name:'北京',value:0.1}],	[{name:'河北'}, {name:'北京',value:20.9}],	[{name:'河南'}, {name:'北京',value:14.9}],	[{name:'黑龙江'}, {name:'北京',value:5.5}],	[{name:'湖北'}, {name:'北京',value:4.4}],	[{name:'湖南'}, {name:'北京',value:2.0}],	[{name:'吉林'}, {name:'北京',value:2.8}],	[{name:'江苏'}, {name:'北京',value:2.0}],	[{name:'江西'}, {name:'北京',value:2.0}],	[{name:'辽宁'}, {name:'北京',value:2.9}],	[{name:'内蒙'}, {name:'北京',value:2.6}],	[{name:'宁夏'}, {name:'北京',value:0.3}],	[{name:'青海'}, {name:'北京',value:0.1}],	[{name:'山东'}, {name:'北京',value:12.0}],	[{name:'山西'}, {name:'北京',value:4.2}],	[{name:'陕西'}, {name:'北京',value:2.2}],	[{name:'上海'}, {name:'北京',value:0.1}],	[{name:'四川'}, {name:'北京',value:3.9}],	[{name:'天津'}, {name:'北京',value:0.8}],	[{name:'西藏'}, {name:'北京',value:0.0}],	[{name:'新疆'}, {name:'北京',value:0.3}],	[{name:'兵团'}, {name:'北京',value:0.0}],	[{name:'云南'}, {name:'北京',value:0.5}],	[{name:'浙江'}, {name:'北京',value:1.7}],	[{name:'重庆'}, {name:'北京',value:0.9}],
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+{name:'安徽',value:7.2},	 {name:'北京',value:0.0},	 {name:'福建',value:1.9},	 {name:'甘肃',value:2.1},	 {name:'广东',value:1.0},	 {name:'广西',value:0.4},	 {name:'贵州',value:0.4},	 {name:'海南',value:0.1},	 {name:'河北',value:20.9},	 {name:'河南',value:14.9},	 {name:'黑龙江',value:5.5},	 {name:'湖北',value:4.4},	 {name:'湖南',value:2.0},	 {name:'吉林',value:2.8},	 {name:'江苏',value:2.0},	 {name:'江西',value:2.0},	 {name:'辽宁',value:2.9},	 {name:'内蒙',value:2.6},	 {name:'宁夏',value:0.3},	 {name:'青海',value:0.1},	 {name:'山东',value:12.0},	 {name:'山西',value:4.2},	 {name:'陕西',value:2.2},	 {name:'上海',value:0.1},	 {name:'四川',value:3.9},	 {name:'天津',value:0.8},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.3},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.5},	 {name:'浙江',value:1.7},	 {name:'重庆',value:0.9},
+  
+                ]
+            }
+        },
+        {
+            name: '福建',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'福建',value:3.2}],	[{name:'北京'}, {name:'福建',value:0.1}],	[{name:'福建'}, {name:'福建',value:40.8}],	[{name:'甘肃'}, {name:'福建',value:0.2}],	[{name:'广东'}, {name:'福建',value:0.6}],	[{name:'广西'}, {name:'福建',value:0.8}],	[{name:'贵州'}, {name:'福建',value:6.7}],	[{name:'海南'}, {name:'福建',value:0.1}],	[{name:'河北'}, {name:'福建',value:0.2}],	[{name:'河南'}, {name:'福建',value:3.8}],	[{name:'黑龙江'}, {name:'福建',value:0.3}],	[{name:'湖北'}, {name:'福建',value:4.6}],	[{name:'湖南'}, {name:'福建',value:3.0}],	[{name:'吉林'}, {name:'福建',value:0.2}],	[{name:'江苏'}, {name:'福建',value:0.5}],	[{name:'江西'}, {name:'福建',value:12.4}],	[{name:'辽宁'}, {name:'福建',value:0.1}],	[{name:'内蒙'}, {name:'福建',value:0.1}],	[{name:'宁夏'}, {name:'福建',value:0.1}],	[{name:'青海'}, {name:'福建',value:0.0}],	[{name:'山东'}, {name:'福建',value:0.5}],	[{name:'山西'}, {name:'福建',value:0.1}],	[{name:'陕西'}, {name:'福建',value:0.8}],	[{name:'上海'}, {name:'福建',value:0.0}],	[{name:'四川'}, {name:'福建',value:12.6}],	[{name:'天津'}, {name:'福建',value:0.0}],	[{name:'西藏'}, {name:'福建',value:0.0}],	[{name:'新疆'}, {name:'福建',value:0.0}],	[{name:'兵团'}, {name:'福建',value:0.0}],	[{name:'云南'}, {name:'福建',value:2.6}],	[{name:'浙江'}, {name:'福建',value:1.0}],	
+                  [{name:'重庆'}, {name:'福建',value:4.5}],
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+{name:'安徽',value:3.2},	 {name:'北京',value:0.1},	 {name:'福建',value:40.8},	 {name:'甘肃',value:0.2},	 {name:'广东',value:0.6},	 {name:'广西',value:0.8},	 {name:'贵州',value:6.7},	 {name:'海南',value:0.1},	 {name:'河北',value:0.2},	 {name:'河南',value:3.8},	 {name:'黑龙江',value:0.3},	 {name:'湖北',value:4.6},	 {name:'湖南',value:3.0},	 {name:'吉林',value:0.2},	 {name:'江苏',value:0.5},	 {name:'江西',value:12.4},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.1},	 {name:'青海',value:0.0},	 {name:'山东',value:0.5},	 {name:'山西',value:0.1},	 {name:'陕西',value:0.8},	 {name:'上海',value:0.0},	 {name:'四川',value:12.6},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:2.6},	 {name:'浙江',value:1.0},	 {name:'重庆',value:4.5},
+
+                ]
+            }
+        },
+              {
+            name: '甘肃',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'甘肃',value:1.8}],	[{name:'北京'}, {name:'甘肃',value:0.0}],	[{name:'福建'}, {name:'甘肃',value:1.1}],	[{name:'甘肃'}, {name:'甘肃',value:68.3}],	[{name:'广东'}, {name:'甘肃',value:0.1}],	[{name:'广西'}, {name:'甘肃',value:0.1}],	[{name:'贵州'}, {name:'甘肃',value:0.1}],	[{name:'海南'}, {name:'甘肃',value:0.0}],	[{name:'河北'}, {name:'甘肃',value:1.4}],	[{name:'河南'}, {name:'甘肃',value:6.0}],	[{name:'黑龙江'}, {name:'甘肃',value:0.2}],	[{name:'湖北'}, {name:'甘肃',value:3.1}],	[{name:'湖南'}, {name:'甘肃',value:1.6}],	[{name:'吉林'}, {name:'甘肃',value:0.1}],	[{name:'江苏'}, {name:'甘肃',value:1.6}],	[{name:'江西'}, {name:'甘肃',value:1.1}],	[{name:'辽宁'}, {name:'甘肃',value:0.2}],	[{name:'内蒙'}, {name:'甘肃',value:0.2}],	[{name:'宁夏'}, {name:'甘肃',value:0.6}],	[{name:'青海'}, {name:'甘肃',value:0.6}],	[{name:'山东'}, {name:'甘肃',value:1.2}],	[{name:'山西'}, {name:'甘肃',value:0.4}],	[{name:'陕西'}, {name:'甘肃',value:3.0}],	[{name:'上海'}, {name:'甘肃',value:0.0}],	[{name:'四川'}, {name:'甘肃',value:3.1}],	[{name:'天津'}, {name:'甘肃',value:0.0}],	[{name:'西藏'}, {name:'甘肃',value:0.0}],	[{name:'新疆'}, {name:'甘肃',value:0.2}],	[{name:'兵团'}, {name:'甘肃',value:0.0}],	[{name:'云南'}, {name:'甘肃',value:0.1}],	[{name:'浙江'}, {name:'甘肃',value:2.8}],	[{name:'重庆'}, {name:'甘肃',value:1.0}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:1.8},	 {name:'北京',value:0.0},	 {name:'福建',value:1.1},	 {name:'甘肃',value:68.3},	 {name:'广东',value:0.1},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.1},	 {name:'海南',value:0.0},	 {name:'河北',value:1.4},	 {name:'河南',value:6.0},	 {name:'黑龙江',value:0.2},	 {name:'湖北',value:3.1},	 {name:'湖南',value:1.6},	 {name:'吉林',value:0.1},	 {name:'江苏',value:1.6},	 {name:'江西',value:1.1},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.2},	 {name:'宁夏',value:0.6},	 {name:'青海',value:0.6},	 {name:'山东',value:1.2},	 {name:'山西',value:0.4},	 {name:'陕西',value:3.0},	 {name:'上海',value:0.0},	 {name:'四川',value:3.1},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.2},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:2.8},	 {name:'重庆',value:1.0},
+
+                ]
+            }
+        },
+              {
+            name: '广东',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'广东',value:1.7}],	[{name:'北京'}, {name:'广东',value:0.0}],	[{name:'福建'}, {name:'广东',value:2.2}],	[{name:'甘肃'}, {name:'广东',value:0.3}],	[{name:'广东'}, {name:'广东',value:28.7}],	[{name:'广西'}, {name:'广东',value:15.8}],	[{name:'贵州'}, {name:'广东',value:3.8}],	[{name:'海南'}, {name:'广东',value:0.5}],	[{name:'河北'}, {name:'广东',value:0.2}],	[{name:'河南'}, {name:'广东',value:4.1}],	[{name:'黑龙江'}, {name:'广东',value:0.2}],	[{name:'湖北'}, {name:'广东',value:6.1}],	[{name:'湖南'}, {name:'广东',value:14.7}],	[{name:'吉林'}, {name:'广东',value:0.1}],	[{name:'江苏'}, {name:'广东',value:0.3}],	[{name:'江西'}, {name:'广东',value:5.3}],	[{name:'辽宁'}, {name:'广东',value:0.2}],	[{name:'内蒙'}, {name:'广东',value:0.1}],	[{name:'宁夏'}, {name:'广东',value:0.0}],	[{name:'青海'}, {name:'广东',value:0.0}],	[{name:'山东'}, {name:'广东',value:0.3}],	[{name:'山西'}, {name:'广东',value:0.0}],	[{name:'陕西'}, {name:'广东',value:1.2}],	[{name:'上海'}, {name:'广东',value:0.0}],	[{name:'四川'}, {name:'广东',value:9.2}],	[{name:'天津'}, {name:'广东',value:0.0}],	[{name:'西藏'}, {name:'广东',value:0.0}],	[{name:'新疆'}, {name:'广东',value:0.1}],	[{name:'兵团'}, {name:'广东',value:0.0}],	[{name:'云南'}, {name:'广东',value:1.7}],	[{name:'浙江'}, {name:'广东',value:0.5}],	[{name:'重庆'}, {name:'广东',value:2.6}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:1.7},	 {name:'北京',value:0.0},	 {name:'福建',value:2.2},	 {name:'甘肃',value:0.3},	 {name:'广东',value:28.7},	 {name:'广西',value:15.8},	 {name:'贵州',value:3.8},	 {name:'海南',value:0.5},	 {name:'河北',value:0.2},	 {name:'河南',value:4.1},	 {name:'黑龙江',value:0.2},	 {name:'湖北',value:6.1},	 {name:'湖南',value:14.7},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.3},	 {name:'江西',value:5.3},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.0},	 {name:'山东',value:0.3},	 {name:'山西',value:0.0},	 {name:'陕西',value:1.2},	 {name:'上海',value:0.0},	 {name:'四川',value:9.2},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:1.7},	 {name:'浙江',value:0.5},	 {name:'重庆',value:2.6},
+
+                ]
+            }
+        },
+           {
+            name: '广西',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'广西',value:0.9}],	[{name:'北京'}, {name:'广西',value:0.0}],	[{name:'福建'}, {name:'广西',value:1.7}],	[{name:'甘肃'}, {name:'广西',value:0.2}],	[{name:'广东'}, {name:'广西',value:2.2}],	[{name:'广西'}, {name:'广西',value:77.2}],	[{name:'贵州'}, {name:'广西',value:1.0}],	[{name:'海南'}, {name:'广西',value:0.4}],	[{name:'河北'}, {name:'广西',value:0.4}],	[{name:'河南'}, {name:'广西',value:0.7}],	[{name:'黑龙江'}, {name:'广西',value:0.4}],	[{name:'湖北'}, {name:'广西',value:1.4}],	[{name:'湖南'}, {name:'广西',value:6.3}],	[{name:'吉林'}, {name:'广西',value:0.2}],	[{name:'江苏'}, {name:'广西',value:0.2}],	[{name:'江西'}, {name:'广西',value:1.1}],	[{name:'辽宁'}, {name:'广西',value:0.2}],	[{name:'内蒙'}, {name:'广西',value:0.1}],	[{name:'宁夏'}, {name:'广西',value:0.0}],	[{name:'青海'}, {name:'广西',value:0.0}],	[{name:'山东'}, {name:'广西',value:1.1}],	[{name:'山西'}, {name:'广西',value:0.2}],	[{name:'陕西'}, {name:'广西',value:0.2}],	[{name:'上海'}, {name:'广西',value:0.1}],	[{name:'四川'}, {name:'广西',value:1.1}],	[{name:'天津'}, {name:'广西',value:0.0}],	[{name:'西藏'}, {name:'广西',value:0.0}],	[{name:'新疆'}, {name:'广西',value:0.1}],	[{name:'兵团'}, {name:'广西',value:0.0}],	[{name:'云南'}, {name:'广西',value:0.5}],	[{name:'浙江'}, {name:'广西',value:1.6}],	[{name:'重庆'}, {name:'广西',value:0.8}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:0.9},	 {name:'北京',value:0.0},	 {name:'福建',value:1.7},	 {name:'甘肃',value:0.2},	 {name:'广东',value:2.2},	 {name:'广西',value:77.2},	 {name:'贵州',value:1.0},	 {name:'海南',value:0.4},	 {name:'河北',value:0.4},	 {name:'河南',value:0.7},	 {name:'黑龙江',value:0.4},	 {name:'湖北',value:1.4},	 {name:'湖南',value:6.3},	 {name:'吉林',value:0.2},	 {name:'江苏',value:0.2},	 {name:'江西',value:1.1},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.0},	 {name:'山东',value:1.1},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.2},	 {name:'上海',value:0.1},	 {name:'四川',value:1.1},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.5},	 {name:'浙江',value:1.6},	 {name:'重庆',value:0.8},
+
+                ]
+            }
+        },
+           {
+            name: '贵州',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'贵州',value:1.3}],	[{name:'北京'}, {name:'贵州',value:0.1}],	[{name:'福建'}, {name:'贵州',value:1.5}],	[{name:'甘肃'}, {name:'贵州',value:0.1}],	[{name:'广东'}, {name:'贵州',value:0.6}],	[{name:'广西'}, {name:'贵州',value:0.5}],	[{name:'贵州'}, {name:'贵州',value:64.7}],	[{name:'海南'}, {name:'贵州',value:0.1}],	[{name:'河北'}, {name:'贵州',value:0.9}],	[{name:'河南'}, {name:'贵州',value:1.6}],	[{name:'黑龙江'}, {name:'贵州',value:0.1}],	[{name:'湖北'}, {name:'贵州',value:1.9}],	[{name:'湖南'}, {name:'贵州',value:6.9}],	[{name:'吉林'}, {name:'贵州',value:0.1}],	[{name:'江苏'}, {name:'贵州',value:0.5}],	[{name:'江西'}, {name:'贵州',value:2.0}],	[{name:'辽宁'}, {name:'贵州',value:0.1}],	[{name:'内蒙'}, {name:'贵州',value:0.1}],	[{name:'宁夏'}, {name:'贵州',value:0.0}],	[{name:'青海'}, {name:'贵州',value:0.0}],	[{name:'山东'}, {name:'贵州',value:0.5}],	[{name:'山西'}, {name:'贵州',value:0.2}],	[{name:'陕西'}, {name:'贵州',value:0.2}],	[{name:'上海'}, {name:'贵州',value:0.1}],	[{name:'四川'}, {name:'贵州',value:8.3}],	[{name:'天津'}, {name:'贵州',value:0.0}],	[{name:'西藏'}, {name:'贵州',value:0.0}],	[{name:'新疆'}, {name:'贵州',value:0.1}],	[{name:'兵团'}, {name:'贵州',value:0.0}],	[{name:'云南'}, {name:'贵州',value:1.1}],	[{name:'浙江'}, {name:'贵州',value:1.8}],	[{name:'重庆'}, {name:'贵州',value:4.9}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:1.3},	 {name:'北京',value:0.1},	 {name:'福建',value:1.5},	 {name:'甘肃',value:0.1},	 {name:'广东',value:0.6},	 {name:'广西',value:0.5},	 {name:'贵州',value:64.7},	 {name:'海南',value:0.1},	 {name:'河北',value:0.9},	 {name:'河南',value:1.6},	 {name:'黑龙江',value:0.1},	 {name:'湖北',value:1.9},	 {name:'湖南',value:6.9},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.5},	 {name:'江西',value:2.0},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.0},	 {name:'山东',value:0.5},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.2},	 {name:'上海',value:0.1},	 {name:'四川',value:8.3},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:1.1},	 {name:'浙江',value:1.8},	 {name:'重庆',value:4.9},
+
+                ]
+            }
+        },
+           {
+            name: '海南',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'海南',value:3.3}],	[{name:'北京'}, {name:'海南',value:0.1}],	[{name:'福建'}, {name:'海南',value:2.0}],	[{name:'甘肃'}, {name:'海南',value:0.5}],	[{name:'广东'}, {name:'海南',value:6.4}],	[{name:'广西'}, {name:'海南',value:4.4}],	[{name:'贵州'}, {name:'海南',value:1.4}],	[{name:'海南'}, {name:'海南',value:41.5}],	[{name:'河北'}, {name:'海南',value:0.5}],	[{name:'河南'}, {name:'海南',value:4.0}],	[{name:'黑龙江'}, {name:'海南',value:2.9}],	[{name:'湖北'}, {name:'海南',value:4.3}],	[{name:'湖南'}, {name:'海南',value:8.1}],	[{name:'吉林'}, {name:'海南',value:0.7}],	[{name:'江苏'}, {name:'海南',value:0.6}],	[{name:'江西'}, {name:'海南',value:3.5}],	[{name:'辽宁'}, {name:'海南',value:0.6}],	[{name:'内蒙'}, {name:'海南',value:0.2}],	[{name:'宁夏'}, {name:'海南',value:0.1}],	[{name:'青海'}, {name:'海南',value:0.1}],	[{name:'山东'}, {name:'海南',value:0.5}],	[{name:'山西'}, {name:'海南',value:0.2}],	[{name:'陕西'}, {name:'海南',value:0.6}],	[{name:'上海'}, {name:'海南',value:0.1}],	[{name:'四川'}, {name:'海南',value:9.2}],	[{name:'天津'}, {name:'海南',value:0.0}],	[{name:'西藏'}, {name:'海南',value:0.0}],	[{name:'新疆'}, {name:'海南',value:0.1}],	[{name:'兵团'}, {name:'海南',value:0.0}],	[{name:'云南'}, {name:'海南',value:0.8}],	[{name:'浙江'}, {name:'海南',value:0.7}],	[{name:'重庆'}, {name:'海南',value:2.4}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:3.3},	 {name:'北京',value:0.1},	 {name:'福建',value:2.0},	 {name:'甘肃',value:0.5},	 {name:'广东',value:6.4},	 {name:'广西',value:4.4},	 {name:'贵州',value:1.4},	 {name:'海南',value:41.5},	 {name:'河北',value:0.5},	 {name:'河南',value:4.0},	 {name:'黑龙江',value:2.9},	 {name:'湖北',value:4.3},	 {name:'湖南',value:8.1},	 {name:'吉林',value:0.7},	 {name:'江苏',value:0.6},	 {name:'江西',value:3.5},	 {name:'辽宁',value:0.6},	 {name:'内蒙',value:0.2},	 {name:'宁夏',value:0.1},	 {name:'青海',value:0.1},	 {name:'山东',value:0.5},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.6},	 {name:'上海',value:0.1},	 {name:'四川',value:9.2},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.8},	 {name:'浙江',value:0.7},	 {name:'重庆',value:2.4},
+
+                ]
+            }
+        },
+           {
+            name: '河北',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'河北',value:2.8}],	[{name:'北京'}, {name:'河北',value:0.2}],	[{name:'福建'}, {name:'河北',value:1.0}],	[{name:'甘肃'}, {name:'河北',value:0.7}],	[{name:'广东'}, {name:'河北',value:0.2}],	[{name:'广西'}, {name:'河北',value:0.2}],	[{name:'贵州'}, {name:'河北',value:0.5}],	[{name:'海南'}, {name:'河北',value:0.0}],	[{name:'河北'}, {name:'河北',value:57.8}],	[{name:'河南'}, {name:'河北',value:6.9}],	[{name:'黑龙江'}, {name:'河北',value:5.4}],	[{name:'湖北'}, {name:'河北',value:2.5}],	[{name:'湖南'}, {name:'河北',value:0.6}],	[{name:'吉林'}, {name:'河北',value:1.3}],	[{name:'江苏'}, {name:'河北',value:1.1}],	[{name:'江西'}, {name:'河北',value:0.8}],	[{name:'辽宁'}, {name:'河北',value:2.2}],	[{name:'内蒙'}, {name:'河北',value:1.9}],	[{name:'宁夏'}, {name:'河北',value:0.0}],	[{name:'青海'}, {name:'河北',value:0.3}],	[{name:'山东'}, {name:'河北',value:4.1}],	[{name:'山西'}, {name:'河北',value:1.8}],	[{name:'陕西'}, {name:'河北',value:1.6}],	[{name:'上海'}, {name:'河北',value:0.0}],	[{name:'四川'}, {name:'河北',value:2.4}],	[{name:'天津'}, {name:'河北',value:0.5}],	[{name:'西藏'}, {name:'河北',value:0.0}],	[{name:'新疆'}, {name:'河北',value:0.1}],	[{name:'兵团'}, {name:'河北',value:0.0}],	[{name:'云南'}, {name:'河北',value:0.4}],	[{name:'浙江'}, {name:'河北',value:1.7}],	[{name:'重庆'}, {name:'河北',value:0.9}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:2.8},	 {name:'北京',value:0.2},	 {name:'福建',value:1.0},	 {name:'甘肃',value:0.7},	 {name:'广东',value:0.2},	 {name:'广西',value:0.2},	 {name:'贵州',value:0.5},	 {name:'海南',value:0.0},	 {name:'河北',value:57.8},	 {name:'河南',value:6.9},	 {name:'黑龙江',value:5.4},	 {name:'湖北',value:2.5},	 {name:'湖南',value:0.6},	 {name:'吉林',value:1.3},	 {name:'江苏',value:1.1},	 {name:'江西',value:0.8},	 {name:'辽宁',value:2.2},	 {name:'内蒙',value:1.9},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.3},	 {name:'山东',value:4.1},	 {name:'山西',value:1.8},	 {name:'陕西',value:1.6},	 {name:'上海',value:0.0},	 {name:'四川',value:2.4},	 {name:'天津',value:0.5},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.4},	 {name:'浙江',value:1.7},	 {name:'重庆',value:0.9},
+
+                ]
+            }
+        },
+           {
+            name: '河南',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'河南',value:1.7}],	[{name:'北京'}, {name:'河南',value:0.0}],	[{name:'福建'}, {name:'河南',value:0.9}],	[{name:'甘肃'}, {name:'河南',value:0.3}],	[{name:'广东'}, {name:'河南',value:0.2}],	[{name:'广西'}, {name:'河南',value:0.2}],	[{name:'贵州'}, {name:'河南',value:0.1}],	[{name:'海南'}, {name:'河南',value:0.0}],	[{name:'河北'}, {name:'河南',value:0.7}],	[{name:'河南'}, {name:'河南',value:84.4}],	[{name:'黑龙江'}, {name:'河南',value:0.2}],	[{name:'湖北'}, {name:'河南',value:1.8}],	[{name:'湖南'}, {name:'河南',value:0.5}],	[{name:'吉林'}, {name:'河南',value:0.1}],	[{name:'江苏'}, {name:'河南',value:0.7}],	[{name:'江西'}, {name:'河南',value:0.9}],	[{name:'辽宁'}, {name:'河南',value:0.1}],	[{name:'内蒙'}, {name:'河南',value:0.1}],	[{name:'宁夏'}, {name:'河南',value:0.0}],	[{name:'青海'}, {name:'河南',value:0.3}],	[{name:'山东'}, {name:'河南',value:1.4}],	[{name:'山西'}, {name:'河南',value:0.7}],	[{name:'陕西'}, {name:'河南',value:0.6}],	[{name:'上海'}, {name:'河南',value:0.1}],	[{name:'四川'}, {name:'河南',value:1.0}],	[{name:'天津'}, {name:'河南',value:0.0}],	[{name:'西藏'}, {name:'河南',value:0.0}],	[{name:'新疆'}, {name:'河南',value:0.1}],	[{name:'兵团'}, {name:'河南',value:0.0}],	[{name:'云南'}, {name:'河南',value:0.0}],	[{name:'浙江'}, {name:'河南',value:2.1}],	[{name:'重庆'}, {name:'河南',value:0.8}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:1.7},	 {name:'北京',value:0.0},	 {name:'福建',value:0.9},	 {name:'甘肃',value:0.3},	 {name:'广东',value:0.2},	 {name:'广西',value:0.2},	 {name:'贵州',value:0.1},	 {name:'海南',value:0.0},	 {name:'河北',value:0.7},	 {name:'河南',value:84.4},	 {name:'黑龙江',value:0.2},	 {name:'湖北',value:1.8},	 {name:'湖南',value:0.5},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.7},	 {name:'江西',value:0.9},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.3},	 {name:'山东',value:1.4},	 {name:'山西',value:0.7},	 {name:'陕西',value:0.6},	 {name:'上海',value:0.1},	 {name:'四川',value:1.0},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.0},	 {name:'浙江',value:2.1},	 {name:'重庆',value:0.8},
+
+                ]
+            }
+        },
+           {
+            name: '黑龙江',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'黑龙江',value:1.7}],	[{name:'北京'}, {name:'黑龙江',value:0.0}],	[{name:'福建'}, {name:'黑龙江',value:0.1}],	[{name:'甘肃'}, {name:'黑龙江',value:0.1}],	[{name:'广东'}, {name:'黑龙江',value:0.1}],	[{name:'广西'}, {name:'黑龙江',value:0.0}],	[{name:'贵州'}, {name:'黑龙江',value:0.0}],	[{name:'海南'}, {name:'黑龙江',value:0.0}],	[{name:'河北'}, {name:'黑龙江',value:0.5}],	[{name:'河南'}, {name:'黑龙江',value:0.9}],	[{name:'黑龙江'}, {name:'黑龙江',value:84.4}],	[{name:'湖北'}, {name:'黑龙江',value:0.7}],	[{name:'湖南'}, {name:'黑龙江',value:0.2}],	[{name:'吉林'}, {name:'黑龙江',value:4.5}],	[{name:'江苏'}, {name:'黑龙江',value:0.3}],	[{name:'江西'}, {name:'黑龙江',value:0.2}],	[{name:'辽宁'}, {name:'黑龙江',value:0.9}],	[{name:'内蒙'}, {name:'黑龙江',value:1.5}],	[{name:'宁夏'}, {name:'黑龙江',value:0.0}],	[{name:'青海'}, {name:'黑龙江',value:0.0}],	[{name:'山东'}, {name:'黑龙江',value:2.1}],	[{name:'山西'}, {name:'黑龙江',value:0.2}],	[{name:'陕西'}, {name:'黑龙江',value:0.1}],	[{name:'上海'}, {name:'黑龙江',value:0.0}],	[{name:'四川'}, {name:'黑龙江',value:0.5}],	[{name:'天津'}, {name:'黑龙江',value:0.1}],	[{name:'西藏'}, {name:'黑龙江',value:0.0}],	[{name:'新疆'}, {name:'黑龙江',value:0.0}],	[{name:'兵团'}, {name:'黑龙江',value:0.0}],	[{name:'云南'}, {name:'黑龙江',value:0.1}],	[{name:'浙江'}, {name:'黑龙江',value:0.5}],	[{name:'重庆'}, {name:'黑龙江',value:0.1}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+   {name:'安徽',value:1.7},	 {name:'北京',value:0.0},	 {name:'福建',value:0.1},	 {name:'甘肃',value:0.1},	 {name:'广东',value:0.1},	 {name:'广西',value:0.0},	 {name:'贵州',value:0.0},	 {name:'海南',value:0.0},	 {name:'河北',value:0.5},	 {name:'河南',value:0.9},	 {name:'黑龙江',value:84.4},	 {name:'湖北',value:0.7},	 {name:'湖南',value:0.2},	 {name:'吉林',value:4.5},	 {name:'江苏',value:0.3},	 {name:'江西',value:0.2},	 {name:'辽宁',value:0.9},	 {name:'内蒙',value:1.5},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.0},	 {name:'山东',value:2.1},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.1},	 {name:'上海',value:0.0},	 {name:'四川',value:0.5},	 {name:'天津',value:0.1},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:0.5},	 {name:'重庆',value:0.1},
+
+                ]
+            }
+        },
+           {
+            name: '湖北',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'湖北',value:1.6}],	[{name:'北京'}, {name:'湖北',value:0.1}],	[{name:'福建'}, {name:'湖北',value:0.8}],	[{name:'甘肃'}, {name:'湖北',value:0.6}],	[{name:'广东'}, {name:'湖北',value:0.5}],	[{name:'广西'}, {name:'湖北',value:0.4}],	[{name:'贵州'}, {name:'湖北',value:0.5}],	[{name:'海南'}, {name:'湖北',value:0.1}],	[{name:'河北'}, {name:'湖北',value:0.4}],	[{name:'河南'}, {name:'湖北',value:5.1}],	[{name:'黑龙江'}, {name:'湖北',value:0.2}],	[{name:'湖北'}, {name:'湖北',value:74.8}],	[{name:'湖南'}, {name:'湖北',value:3.1}],	[{name:'吉林'}, {name:'湖北',value:0.0}],	[{name:'江苏'}, {name:'湖北',value:0.7}],	[{name:'江西'}, {name:'湖北',value:1.6}],	[{name:'辽宁'}, {name:'湖北',value:0.0}],	[{name:'内蒙'}, {name:'湖北',value:0.1}],	[{name:'宁夏'}, {name:'湖北',value:0.0}],	[{name:'青海'}, {name:'湖北',value:0.3}],	[{name:'山东'}, {name:'湖北',value:0.6}],	[{name:'山西'}, {name:'湖北',value:0.1}],	[{name:'陕西'}, {name:'湖北',value:0.4}],	[{name:'上海'}, {name:'湖北',value:0.0}],	[{name:'四川'}, {name:'湖北',value:2.3}],	[{name:'天津'}, {name:'湖北',value:0.0}],	[{name:'西藏'}, {name:'湖北',value:0.0}],	[{name:'新疆'}, {name:'湖北',value:0.1}],	[{name:'兵团'}, {name:'湖北',value:0.0}],	[{name:'云南'}, {name:'湖北',value:0.2}],	[{name:'浙江'}, {name:'湖北',value:1.1}],	[{name:'重庆'}, {name:'湖北',value:4.7}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:1.6},	 {name:'北京',value:0.1},	 {name:'福建',value:0.8},	 {name:'甘肃',value:0.6},	 {name:'广东',value:0.5},	 {name:'广西',value:0.4},	 {name:'贵州',value:0.5},	 {name:'海南',value:0.1},	 {name:'河北',value:0.4},	 {name:'河南',value:5.1},	 {name:'黑龙江',value:0.2},	 {name:'湖北',value:74.8},	 {name:'湖南',value:3.1},	 {name:'吉林',value:0.0},	 {name:'江苏',value:0.7},	 {name:'江西',value:1.6},	 {name:'辽宁',value:0.0},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.3},	 {name:'山东',value:0.6},	 {name:'山西',value:0.1},	 {name:'陕西',value:0.4},	 {name:'上海',value:0.0},	 {name:'四川',value:2.3},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.2},	 {name:'浙江',value:1.1},	 {name:'重庆',value:4.7},
+
+                ]
+            }
+        },
+           {
+            name: '湖南',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'湖南',value:0.5}],	[{name:'北京'}, {name:'湖南',value:0.0}],	[{name:'福建'}, {name:'湖南',value:0.9}],	[{name:'甘肃'}, {name:'湖南',value:0.2}],	[{name:'广东'}, {name:'湖南',value:0.6}],	[{name:'广西'}, {name:'湖南',value:0.4}],	[{name:'贵州'}, {name:'湖南',value:0.6}],	[{name:'海南'}, {name:'湖南',value:0.0}],	[{name:'河北'}, {name:'湖南',value:0.3}],	[{name:'河南'}, {name:'湖南',value:0.8}],	[{name:'黑龙江'}, {name:'湖南',value:0.1}],	[{name:'湖北'}, {name:'湖南',value:2.5}],	[{name:'湖南'}, {name:'湖南',value:88.7}],	[{name:'吉林'}, {name:'湖南',value:0.0}],	[{name:'江苏'}, {name:'湖南',value:0.4}],	[{name:'江西'}, {name:'湖南',value:1.6}],	[{name:'辽宁'}, {name:'湖南',value:0.1}],	[{name:'内蒙'}, {name:'湖南',value:0.0}],	[{name:'宁夏'}, {name:'湖南',value:0.0}],	[{name:'青海'}, {name:'湖南',value:0.0}],	[{name:'山东'}, {name:'湖南',value:0.2}],	[{name:'山西'}, {name:'湖南',value:0.0}],	[{name:'陕西'}, {name:'湖南',value:0.2}],	[{name:'上海'}, {name:'湖南',value:0.0}],	[{name:'四川'}, {name:'湖南',value:0.6}],	[{name:'天津'}, {name:'湖南',value:0.0}],	[{name:'西藏'}, {name:'湖南',value:0.0}],	[{name:'新疆'}, {name:'湖南',value:0.1}],	[{name:'兵团'}, {name:'湖南',value:0.0}],	[{name:'云南'}, {name:'湖南',value:0.1}],	[{name:'浙江'}, {name:'湖南',value:0.7}],	[{name:'重庆'}, {name:'湖南',value:0.4}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:0.5},	 {name:'北京',value:0.0},	 {name:'福建',value:0.9},	 {name:'甘肃',value:0.2},	 {name:'广东',value:0.6},	 {name:'广西',value:0.4},	 {name:'贵州',value:0.6},	 {name:'海南',value:0.0},	 {name:'河北',value:0.3},	 {name:'河南',value:0.8},	 {name:'黑龙江',value:0.1},	 {name:'湖北',value:2.5},	 {name:'湖南',value:88.7},	 {name:'吉林',value:0.0},	 {name:'江苏',value:0.4},	 {name:'江西',value:1.6},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.0},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.0},	 {name:'山东',value:0.2},	 {name:'山西',value:0.0},	 {name:'陕西',value:0.2},	 {name:'上海',value:0.0},	 {name:'四川',value:0.6},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:0.7},	 {name:'重庆',value:0.4},
+
+                ]
+            }
+        },
+           {
+            name: '吉林',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'吉林',value:1.4}],	[{name:'北京'}, {name:'吉林',value:0.0}],	[{name:'福建'}, {name:'吉林',value:0.9}],	[{name:'甘肃'}, {name:'吉林',value:0.1}],	[{name:'广东'}, {name:'吉林',value:0.1}],	[{name:'广西'}, {name:'吉林',value:0.1}],	[{name:'贵州'}, {name:'吉林',value:0.1}],	[{name:'海南'}, {name:'吉林',value:0.0}],	[{name:'河北'}, {name:'吉林',value:0.9}],	[{name:'河南'}, {name:'吉林',value:1.4}],	[{name:'黑龙江'}, {name:'吉林',value:10.9}],	[{name:'湖北'}, {name:'吉林',value:1.0}],	[{name:'湖南'}, {name:'吉林',value:0.4}],	[{name:'吉林'}, {name:'吉林',value:73.0}],	[{name:'江苏'}, {name:'吉林',value:0.7}],	[{name:'江西'}, {name:'吉林',value:0.3}],	[{name:'辽宁'}, {name:'吉林',value:3.0}],	[{name:'内蒙'}, {name:'吉林',value:1.9}],	[{name:'宁夏'}, {name:'吉林',value:0.0}],	[{name:'青海'}, {name:'吉林',value:0.1}],	[{name:'山东'}, {name:'吉林',value:2.1}],	[{name:'山西'}, {name:'吉林',value:0.0}],	[{name:'陕西'}, {name:'吉林',value:0.2}],	[{name:'上海'}, {name:'吉林',value:0.0}],	[{name:'四川'}, {name:'吉林',value:0.5}],	[{name:'天津'}, {name:'吉林',value:0.0}],	[{name:'西藏'}, {name:'吉林',value:0.0}],	[{name:'新疆'}, {name:'吉林',value:0.1}],	[{name:'兵团'}, {name:'吉林',value:0.0}],	[{name:'云南'}, {name:'吉林',value:0.1}],	[{name:'浙江'}, {name:'吉林',value:0.8}],	[{name:'重庆'}, {name:'吉林',value:0.2}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:1.4},	 {name:'北京',value:0.0},	 {name:'福建',value:0.9},	 {name:'甘肃',value:0.1},	 {name:'广东',value:0.1},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.1},	 {name:'海南',value:0.0},	 {name:'河北',value:0.9},	 {name:'河南',value:1.4},	 {name:'黑龙江',value:10.9},	 {name:'湖北',value:1.0},	 {name:'湖南',value:0.4},	 {name:'吉林',value:73.0},	 {name:'江苏',value:0.7},	 {name:'江西',value:0.3},	 {name:'辽宁',value:3.0},	 {name:'内蒙',value:1.9},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.1},	 {name:'山东',value:2.1},	 {name:'山西',value:0.0},	 {name:'陕西',value:0.2},	 {name:'上海',value:0.0},	 {name:'四川',value:0.5},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:0.8},	 {name:'重庆',value:0.2},
+
+                ]
+            }
+        },
+           {
+            name: '江苏',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'江苏',value:25.4}],	[{name:'北京'}, {name:'江苏',value:0.1}],	[{name:'福建'}, {name:'江苏',value:1.7}],	[{name:'甘肃'}, {name:'江苏',value:1.0}],	[{name:'广东'}, {name:'江苏',value:0.2}],	[{name:'广西'}, {name:'江苏',value:0.4}],	[{name:'贵州'}, {name:'江苏',value:1.9}],	[{name:'海南'}, {name:'江苏',value:0.0}],	[{name:'河北'}, {name:'江苏',value:0.7}],	[{name:'河南'}, {name:'江苏',value:7.7}],	[{name:'黑龙江'}, {name:'江苏',value:0.6}],	[{name:'湖北'}, {name:'江苏',value:3.3}],	[{name:'湖南'}, {name:'江苏',value:1.6}],	[{name:'吉林'}, {name:'江苏',value:0.3}],	[{name:'江苏'}, {name:'江苏',value:34.6}],	[{name:'江西'}, {name:'江苏',value:2.4}],	[{name:'辽宁'}, {name:'江苏',value:0.4}],	[{name:'内蒙'}, {name:'江苏',value:0.1}],	[{name:'宁夏'}, {name:'江苏',value:0.0}],	[{name:'青海'}, {name:'江苏',value:0.3}],	[{name:'山东'}, {name:'江苏',value:4.8}],	[{name:'山西'}, {name:'江苏',value:0.4}],	[{name:'陕西'}, {name:'江苏',value:1.5}],	[{name:'上海'}, {name:'江苏',value:0.1}],	[{name:'四川'}, {name:'江苏',value:5.5}],	[{name:'天津'}, {name:'江苏',value:0.0}],	[{name:'西藏'}, {name:'江苏',value:0.0}],	[{name:'新疆'}, {name:'江苏',value:0.1}],	[{name:'兵团'}, {name:'江苏',value:0.0}],	[{name:'云南'}, {name:'江苏',value:1.5}],	[{name:'浙江'}, {name:'江苏',value:2.4}],	[{name:'重庆'}, {name:'江苏',value:1.3}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:25.4},	 {name:'北京',value:0.1},	 {name:'福建',value:1.7},	 {name:'甘肃',value:1.0},	 {name:'广东',value:0.2},	 {name:'广西',value:0.4},	 {name:'贵州',value:1.9},	 {name:'海南',value:0.0},	 {name:'河北',value:0.7},	 {name:'河南',value:7.7},	 {name:'黑龙江',value:0.6},	 {name:'湖北',value:3.3},	 {name:'湖南',value:1.6},	 {name:'吉林',value:0.3},	 {name:'江苏',value:34.6},	 {name:'江西',value:2.4},	 {name:'辽宁',value:0.4},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.3},	 {name:'山东',value:4.8},	 {name:'山西',value:0.4},	 {name:'陕西',value:1.5},	 {name:'上海',value:0.1},	 {name:'四川',value:5.5},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:1.5},	 {name:'浙江',value:2.4},	 {name:'重庆',value:1.3},
+
+                ]
+            }
+        },
+           {
+            name: '江西',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'江西',value:2.3}],	[{name:'北京'}, {name:'江西',value:0.0}],	[{name:'福建'}, {name:'江西',value:3.8}],	[{name:'甘肃'}, {name:'江西',value:0.6}],	[{name:'广东'}, {name:'江西',value:1.0}],	[{name:'广西'}, {name:'江西',value:0.7}],	[{name:'贵州'}, {name:'江西',value:1.2}],	[{name:'海南'}, {name:'江西',value:0.0}],	[{name:'河北'}, {name:'江西',value:0.6}],	[{name:'河南'}, {name:'江西',value:1.8}],	[{name:'黑龙江'}, {name:'江西',value:0.3}],	[{name:'湖北'}, {name:'江西',value:3.5}],	[{name:'湖南'}, {name:'江西',value:6.2}],	[{name:'吉林'}, {name:'江西',value:0.1}],	[{name:'江苏'}, {name:'江西',value:0.9}],	[{name:'江西'}, {name:'江西',value:70.4}],	[{name:'辽宁'}, {name:'江西',value:0.1}],	[{name:'内蒙'}, {name:'江西',value:0.1}],	[{name:'宁夏'}, {name:'江西',value:0.0}],	[{name:'青海'}, {name:'江西',value:0.1}],	[{name:'山东'}, {name:'江西',value:0.7}],	[{name:'山西'}, {name:'江西',value:0.1}],	[{name:'陕西'}, {name:'江西',value:0.3}],	[{name:'上海'}, {name:'江西',value:0.1}],	[{name:'四川'}, {name:'江西',value:1.5}],	[{name:'天津'}, {name:'江西',value:0.0}],	[{name:'西藏'}, {name:'江西',value:0.0}],	[{name:'新疆'}, {name:'江西',value:0.0}],	[{name:'兵团'}, {name:'江西',value:0.0}],	[{name:'云南'}, {name:'江西',value:0.4}],	[{name:'浙江'}, {name:'江西',value:2.3}],	[{name:'重庆'}, {name:'江西',value:0.9}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:2.3},	 {name:'北京',value:0.0},	 {name:'福建',value:3.8},	 {name:'甘肃',value:0.6},	 {name:'广东',value:1.0},	 {name:'广西',value:0.7},	 {name:'贵州',value:1.2},	 {name:'海南',value:0.0},	 {name:'河北',value:0.6},	 {name:'河南',value:1.8},	 {name:'黑龙江',value:0.3},	 {name:'湖北',value:3.5},	 {name:'湖南',value:6.2},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.9},	 {name:'江西',value:70.4},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.1},	 {name:'山东',value:0.7},	 {name:'山西',value:0.1},	 {name:'陕西',value:0.3},	 {name:'上海',value:0.1},	 {name:'四川',value:1.5},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.4},	 {name:'浙江',value:2.3},	 {name:'重庆',value:0.9},
+
+                ]
+            }
+        },
+           {
+            name: '辽宁',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'辽宁',value:2.8}],	[{name:'北京'}, {name:'辽宁',value:0.1}],	[{name:'福建'}, {name:'辽宁',value:0.8}],	[{name:'甘肃'}, {name:'辽宁',value:0.2}],	[{name:'广东'}, {name:'辽宁',value:0.4}],	[{name:'广西'}, {name:'辽宁',value:0.1}],	[{name:'贵州'}, {name:'辽宁',value:0.1}],	[{name:'海南'}, {name:'辽宁',value:0.0}],	[{name:'河北'}, {name:'辽宁',value:1.9}],	[{name:'河南'}, {name:'辽宁',value:3.3}],	[{name:'黑龙江'}, {name:'辽宁',value:23.3}],	[{name:'湖北'}, {name:'辽宁',value:0.8}],	[{name:'湖南'}, {name:'辽宁',value:0.3}],	[{name:'吉林'}, {name:'辽宁',value:10.1}],	[{name:'江苏'}, {name:'辽宁',value:1.0}],	[{name:'江西'}, {name:'辽宁',value:0.4}],	[{name:'辽宁'}, {name:'辽宁',value:40.7}],	[{name:'内蒙'}, {name:'辽宁',value:4.4}],	[{name:'宁夏'}, {name:'辽宁',value:0.0}],	[{name:'青海'}, {name:'辽宁',value:0.2}],	[{name:'山东'}, {name:'辽宁',value:4.8}],	[{name:'山西'}, {name:'辽宁',value:0.3}],	[{name:'陕西'}, {name:'辽宁',value:0.4}],	[{name:'上海'}, {name:'辽宁',value:0.1}],	[{name:'四川'}, {name:'辽宁',value:1.3}],	[{name:'天津'}, {name:'辽宁',value:0.0}],	[{name:'西藏'}, {name:'辽宁',value:0.0}],	[{name:'新疆'}, {name:'辽宁',value:0.1}],	[{name:'兵团'}, {name:'辽宁',value:0.0}],	[{name:'云南'}, {name:'辽宁',value:0.1}],	[{name:'浙江'}, {name:'辽宁',value:1.4}],	[{name:'重庆'}, {name:'辽宁',value:0.5}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:2.8},	 {name:'北京',value:0.1},	 {name:'福建',value:0.8},	 {name:'甘肃',value:0.2},	 {name:'广东',value:0.4},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.1},	 {name:'海南',value:0.0},	 {name:'河北',value:1.9},	 {name:'河南',value:3.3},	 {name:'黑龙江',value:23.3},	 {name:'湖北',value:0.8},	 {name:'湖南',value:0.3},	 {name:'吉林',value:10.1},	 {name:'江苏',value:1.0},	 {name:'江西',value:0.4},	 {name:'辽宁',value:40.7},	 {name:'内蒙',value:4.4},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.2},	 {name:'山东',value:4.8},	 {name:'山西',value:0.3},	 {name:'陕西',value:0.4},	 {name:'上海',value:0.1},	 {name:'四川',value:1.3},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:1.4},	 {name:'重庆',value:0.5},
+
+                ]
+            }
+        },
+           {
+            name: '内蒙',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'内蒙',value:0.7}],	[{name:'北京'}, {name:'内蒙',value:0.0}],	[{name:'福建'}, {name:'内蒙',value:0.4}],	[{name:'甘肃'}, {name:'内蒙',value:1.5}],	[{name:'广东'}, {name:'内蒙',value:0.0}],	[{name:'广西'}, {name:'内蒙',value:0.0}],	[{name:'贵州'}, {name:'内蒙',value:0.0}],	[{name:'海南'}, {name:'内蒙',value:0.0}],	[{name:'河北'}, {name:'内蒙',value:3.5}],	[{name:'河南'}, {name:'内蒙',value:1.4}],	[{name:'黑龙江'}, {name:'内蒙',value:2.9}],	[{name:'湖北'}, {name:'内蒙',value:0.4}],	[{name:'湖南'}, {name:'内蒙',value:0.2}],	[{name:'吉林'}, {name:'内蒙',value:1.3}],	[{name:'江苏'}, {name:'内蒙',value:0.3}],	[{name:'江西'}, {name:'内蒙',value:0.2}],	[{name:'辽宁'}, {name:'内蒙',value:1.0}],	[{name:'内蒙'}, {name:'内蒙',value:76.3}],	[{name:'宁夏'}, {name:'内蒙',value:0.6}],	[{name:'青海'}, {name:'内蒙',value:0.1}],	[{name:'山东'}, {name:'内蒙',value:0.0}],	[{name:'山西'}, {name:'内蒙',value:3.5}],	[{name:'陕西'}, {name:'内蒙',value:4.0}],	[{name:'上海'}, {name:'内蒙',value:0.0}],	[{name:'四川'}, {name:'内蒙',value:0.5}],	[{name:'天津'}, {name:'内蒙',value:0.0}],	[{name:'西藏'}, {name:'内蒙',value:0.0}],	[{name:'新疆'}, {name:'内蒙',value:0.0}],	[{name:'兵团'}, {name:'内蒙',value:0.0}],	[{name:'云南'}, {name:'内蒙',value:0.1}],	[{name:'浙江'}, {name:'内蒙',value:0.4}],	[{name:'重庆'}, {name:'内蒙',value:0.3}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+  {name:'安徽',value:0.7},	 {name:'北京',value:0.0},	 {name:'福建',value:0.4},	 {name:'甘肃',value:1.5},	 {name:'广东',value:0.0},	 {name:'广西',value:0.0},	 {name:'贵州',value:0.0},	 {name:'海南',value:0.0},	 {name:'河北',value:3.5},	 {name:'河南',value:1.4},	 {name:'黑龙江',value:2.9},	 {name:'湖北',value:0.4},	 {name:'湖南',value:0.2},	 {name:'吉林',value:1.3},	 {name:'江苏',value:0.3},	 {name:'江西',value:0.2},	 {name:'辽宁',value:1.0},	 {name:'内蒙',value:76.3},	 {name:'宁夏',value:0.6},	 {name:'青海',value:0.1},	 {name:'山东',value:0.0},	 {name:'山西',value:3.5},	 {name:'陕西',value:4.0},	 {name:'上海',value:0.0},	 {name:'四川',value:0.5},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:0.4},	 {name:'重庆',value:0.3},
+
+                ]
+            }
+        },
+           {
+            name: '宁夏',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'宁夏',value:1.8}],	[{name:'北京'}, {name:'宁夏',value:0.0}],	[{name:'福建'}, {name:'宁夏',value:0.6}],	[{name:'甘肃'}, {name:'宁夏',value:12.5}],	[{name:'广东'}, {name:'宁夏',value:0.1}],	[{name:'广西'}, {name:'宁夏',value:0.0}],	[{name:'贵州'}, {name:'宁夏',value:0.0}],	[{name:'海南'}, {name:'宁夏',value:0.0}],	[{name:'河北'}, {name:'宁夏',value:1.0}],	[{name:'河南'}, {name:'宁夏',value:5.2}],	[{name:'黑龙江'}, {name:'宁夏',value:0.3}],	[{name:'湖北'}, {name:'宁夏',value:1.4}],	[{name:'湖南'}, {name:'宁夏',value:0.4}],	[{name:'吉林'}, {name:'宁夏',value:0.1}],	[{name:'江苏'}, {name:'宁夏',value:0.8}],	[{name:'江西'}, {name:'宁夏',value:0.7}],	[{name:'辽宁'}, {name:'宁夏',value:0.3}],	[{name:'内蒙'}, {name:'宁夏',value:1.0}],	[{name:'宁夏'}, {name:'宁夏',value:60.2}],	[{name:'青海'}, {name:'宁夏',value:0.1}],	[{name:'山东'}, {name:'宁夏',value:1.2}],	[{name:'山西'}, {name:'宁夏',value:0.9}],	[{name:'陕西'}, {name:'宁夏',value:7.6}],	[{name:'上海'}, {name:'宁夏',value:0.0}],	[{name:'四川'}, {name:'宁夏',value:1.6}],	[{name:'天津'}, {name:'宁夏',value:0.0}],	[{name:'西藏'}, {name:'宁夏',value:0.0}],	[{name:'新疆'}, {name:'宁夏',value:0.2}],	[{name:'兵团'}, {name:'宁夏',value:0.0}],	[{name:'云南'}, {name:'宁夏',value:0.1}],	[{name:'浙江'}, {name:'宁夏',value:1.5}],	[{name:'重庆'}, {name:'宁夏',value:0.5}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:1.8},	 {name:'北京',value:0.0},	 {name:'福建',value:0.6},	 {name:'甘肃',value:12.5},	 {name:'广东',value:0.1},	 {name:'广西',value:0.0},	 {name:'贵州',value:0.0},	 {name:'海南',value:0.0},	 {name:'河北',value:1.0},	 {name:'河南',value:5.2},	 {name:'黑龙江',value:0.3},	 {name:'湖北',value:1.4},	 {name:'湖南',value:0.4},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.8},	 {name:'江西',value:0.7},	 {name:'辽宁',value:0.3},	 {name:'内蒙',value:1.0},	 {name:'宁夏',value:60.2},	 {name:'青海',value:0.1},	 {name:'山东',value:1.2},	 {name:'山西',value:0.9},	 {name:'陕西',value:7.6},	 {name:'上海',value:0.0},	 {name:'四川',value:1.6},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.2},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.1},	 {name:'浙江',value:1.5},	 {name:'重庆',value:0.5},
+
+                ]
+            }
+        },
+           {
+            name: '青海',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'青海',value:3.1}],	[{name:'北京'}, {name:'青海',value:0.0}],	[{name:'福建'}, {name:'青海',value:0.6}],	[{name:'甘肃'}, {name:'青海',value:11.6}],	[{name:'广东'}, {name:'青海',value:0.1}],	[{name:'广西'}, {name:'青海',value:0.1}],	[{name:'贵州'}, {name:'青海',value:0.1}],	[{name:'海南'}, {name:'青海',value:0.0}],	[{name:'河北'}, {name:'青海',value:2.1}],	[{name:'河南'}, {name:'青海',value:9.6}],	[{name:'黑龙江'}, {name:'青海',value:0.3}],	[{name:'湖北'}, {name:'青海',value:3.9}],	[{name:'湖南'}, {name:'青海',value:2.4}],	[{name:'吉林'}, {name:'青海',value:0.3}],	[{name:'江苏'}, {name:'青海',value:2.0}],	[{name:'江西'}, {name:'青海',value:0.8}],	[{name:'辽宁'}, {name:'青海',value:0.1}],	[{name:'内蒙'}, {name:'青海',value:0.3}],	[{name:'宁夏'}, {name:'青海',value:0.3}],	[{name:'青海'}, {name:'青海',value:46.7}],	[{name:'山东'}, {name:'青海',value:1.7}],	[{name:'山西'}, {name:'青海',value:1.2}],	[{name:'陕西'}, {name:'青海',value:2.9}],	[{name:'上海'}, {name:'青海',value:0.0}],	[{name:'四川'}, {name:'青海',value:6.3}],	[{name:'天津'}, {name:'青海',value:0.0}],	[{name:'西藏'}, {name:'青海',value:0.1}],	[{name:'新疆'}, {name:'青海',value:0.2}],	[{name:'兵团'}, {name:'青海',value:0.0}],	[{name:'云南'}, {name:'青海',value:0.3}],	[{name:'浙江'}, {name:'青海',value:2.0}],	[{name:'重庆'}, {name:'青海',value:1.1}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:3.1},	 {name:'北京',value:0.0},	 {name:'福建',value:0.6},	 {name:'甘肃',value:11.6},	 {name:'广东',value:0.1},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.1},	 {name:'海南',value:0.0},	 {name:'河北',value:2.1},	 {name:'河南',value:9.6},	 {name:'黑龙江',value:0.3},	 {name:'湖北',value:3.9},	 {name:'湖南',value:2.4},	 {name:'吉林',value:0.3},	 {name:'江苏',value:2.0},	 {name:'江西',value:0.8},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.3},	 {name:'宁夏',value:0.3},	 {name:'青海',value:46.7},	 {name:'山东',value:1.7},	 {name:'山西',value:1.2},	 {name:'陕西',value:2.9},	 {name:'上海',value:0.0},	 {name:'四川',value:6.3},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.1},	 {name:'新疆',value:0.2},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.3},	 {name:'浙江',value:2.0},	 {name:'重庆',value:1.1},
+
+                ]
+            }
+        },
+           {
+            name: '山东',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'山东',value:1.2}],	[{name:'北京'}, {name:'山东',value:0.0}],	[{name:'福建'}, {name:'山东',value:0.5}],	[{name:'甘肃'}, {name:'山东',value:0.2}],	[{name:'广东'}, {name:'山东',value:0.2}],	[{name:'广西'}, {name:'山东',value:0.1}],	[{name:'贵州'}, {name:'山东',value:0.1}],	[{name:'海南'}, {name:'山东',value:0.0}],	[{name:'河北'}, {name:'山东',value:0.7}],	[{name:'河南'}, {name:'山东',value:2.2}],	[{name:'黑龙江'}, {name:'山东',value:2.2}],	[{name:'湖北'}, {name:'山东',value:0.5}],	[{name:'湖南'}, {name:'山东',value:0.2}],	[{name:'吉林'}, {name:'山东',value:0.9}],	[{name:'江苏'}, {name:'山东',value:0.5}],	[{name:'江西'}, {name:'山东',value:0.3}],	[{name:'辽宁'}, {name:'山东',value:0.3}],	[{name:'内蒙'}, {name:'山东',value:0.3}],	[{name:'宁夏'}, {name:'山东',value:0.0}],	[{name:'青海'}, {name:'山东',value:0.1}],	[{name:'山东'}, {name:'山东',value:87.0}],	[{name:'山西'}, {name:'山东',value:0.2}],	[{name:'陕西'}, {name:'山东',value:0.4}],	[{name:'上海'}, {name:'山东',value:0.0}],	[{name:'四川'}, {name:'山东',value:0.9}],	[{name:'天津'}, {name:'山东',value:0.0}],	[{name:'西藏'}, {name:'山东',value:0.0}],	[{name:'新疆'}, {name:'山东',value:0.0}],	[{name:'兵团'}, {name:'山东',value:0.0}],	[{name:'云南'}, {name:'山东',value:0.0}],	[{name:'浙江'}, {name:'山东',value:1.1}],	[{name:'重庆'}, {name:'山东',value:0.2}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:1.2},	 {name:'北京',value:0.0},	 {name:'福建',value:0.5},	 {name:'甘肃',value:0.2},	 {name:'广东',value:0.2},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.1},	 {name:'海南',value:0.0},	 {name:'河北',value:0.7},	 {name:'河南',value:2.2},	 {name:'黑龙江',value:2.2},	 {name:'湖北',value:0.5},	 {name:'湖南',value:0.2},	 {name:'吉林',value:0.9},	 {name:'江苏',value:0.5},	 {name:'江西',value:0.3},	 {name:'辽宁',value:0.3},	 {name:'内蒙',value:0.3},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.1},	 {name:'山东',value:87.0},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.4},	 {name:'上海',value:0.0},	 {name:'四川',value:0.9},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.0},	 {name:'浙江',value:1.1},	 {name:'重庆',value:0.2},
+
+                ]
+            }
+        },
+           {
+            name: '山西',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'山西',value:3.0}],	[{name:'北京'}, {name:'山西',value:0.0}],	[{name:'福建'}, {name:'山西',value:1.8}],	[{name:'甘肃'}, {name:'山西',value:0.5}],	[{name:'广东'}, {name:'山西',value:0.1}],	[{name:'广西'}, {name:'山西',value:0.1}],	[{name:'贵州'}, {name:'山西',value:0.3}],	[{name:'海南'}, {name:'山西',value:0.0}],	[{name:'河北'}, {name:'山西',value:6.2}],	[{name:'河南'}, {name:'山西',value:8.2}],	[{name:'黑龙江'}, {name:'山西',value:0.8}],	[{name:'湖北'}, {name:'山西',value:2.1}],	[{name:'湖南'}, {name:'山西',value:0.6}],	[{name:'吉林'}, {name:'山西',value:0.6}],	[{name:'江苏'}, {name:'山西',value:1.4}],	[{name:'江西'}, {name:'山西',value:1.3}],	[{name:'辽宁'}, {name:'山西',value:0.4}],	[{name:'内蒙'}, {name:'山西',value:3.8}],	[{name:'宁夏'}, {name:'山西',value:0.1}],	[{name:'青海'}, {name:'山西',value:0.2}],	[{name:'山东'}, {name:'山西',value:2.8}],	[{name:'山西'}, {name:'山西',value:55.7}],	[{name:'陕西'}, {name:'山西',value:3.1}],	[{name:'上海'}, {name:'山西',value:0.0}],	[{name:'四川'}, {name:'山西',value:3.2}],	[{name:'天津'}, {name:'山西',value:0.0}],	[{name:'西藏'}, {name:'山西',value:0.0}],	[{name:'新疆'}, {name:'山西',value:0.1}],	[{name:'兵团'}, {name:'山西',value:0.0}],	[{name:'云南'}, {name:'山西',value:0.2}],	[{name:'浙江'}, {name:'山西',value:2.2}],	[{name:'重庆'}, {name:'山西',value:1.0}],
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:3.0},	 {name:'北京',value:0.0},	 {name:'福建',value:1.8},	 {name:'甘肃',value:0.5},	 {name:'广东',value:0.1},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.3},	 {name:'海南',value:0.0},	 {name:'河北',value:6.2},	 {name:'河南',value:8.2},	 {name:'黑龙江',value:0.8},	 {name:'湖北',value:2.1},	 {name:'湖南',value:0.6},	 {name:'吉林',value:0.6},	 {name:'江苏',value:1.4},	 {name:'江西',value:1.3},	 {name:'辽宁',value:0.4},	 {name:'内蒙',value:3.8},	 {name:'宁夏',value:0.1},	 {name:'青海',value:0.2},	 {name:'山东',value:2.8},	 {name:'山西',value:55.7},	 {name:'陕西',value:3.1},	 {name:'上海',value:0.0},	 {name:'四川',value:3.2},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.2},	 {name:'浙江',value:2.2},	 {name:'重庆',value:1.0},
+
+                ]
+            }
+        },
+           {
+            name: '陕西',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'陕西',value:2.0}],	[{name:'北京'}, {name:'陕西',value:0.0}],	[{name:'福建'}, {name:'陕西',value:1.1}],	[{name:'甘肃'}, {name:'陕西',value:2.5}],	[{name:'广东'}, {name:'陕西',value:0.1}],	[{name:'广西'}, {name:'陕西',value:0.0}],	[{name:'贵州'}, {name:'陕西',value:0.2}],	[{name:'海南'}, {name:'陕西',value:0.0}],	[{name:'河北'}, {name:'陕西',value:1.5}],	[{name:'河南'}, {name:'陕西',value:6.0}],	[{name:'黑龙江'}, {name:'陕西',value:0.3}],	[{name:'湖北'}, {name:'陕西',value:2.3}],	[{name:'湖南'}, {name:'陕西',value:1.3}],	[{name:'吉林'}, {name:'陕西',value:0.2}],	[{name:'江苏'}, {name:'陕西',value:0.7}],	[{name:'江西'}, {name:'陕西',value:1.0}],	[{name:'辽宁'}, {name:'陕西',value:0.3}],	[{name:'内蒙'}, {name:'陕西',value:0.9}],	[{name:'宁夏'}, {name:'陕西',value:0.4}],	[{name:'青海'}, {name:'陕西',value:0.3}],	[{name:'山东'}, {name:'陕西',value:1.6}],	[{name:'山西'}, {name:'陕西',value:2.4}],	[{name:'陕西'}, {name:'陕西',value:68.7}],	[{name:'上海'}, {name:'陕西',value:0.0}],	[{name:'四川'}, {name:'陕西',value:2.9}],	[{name:'天津'}, {name:'陕西',value:0.0}],	[{name:'西藏'}, {name:'陕西',value:0.0}],	[{name:'新疆'}, {name:'陕西',value:0.2}],	[{name:'兵团'}, {name:'陕西',value:0.0}],	[{name:'云南'}, {name:'陕西',value:0.3}],	[{name:'浙江'}, {name:'陕西',value:1.7}],	[{name:'重庆'}, {name:'陕西',value:1.4}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:2.0},	 {name:'北京',value:0.0},	 {name:'福建',value:1.1},	 {name:'甘肃',value:2.5},	 {name:'广东',value:0.1},	 {name:'广西',value:0.0},	 {name:'贵州',value:0.2},	 {name:'海南',value:0.0},	 {name:'河北',value:1.5},	 {name:'河南',value:6.0},	 {name:'黑龙江',value:0.3},	 {name:'湖北',value:2.3},	 {name:'湖南',value:1.3},	 {name:'吉林',value:0.2},	 {name:'江苏',value:0.7},	 {name:'江西',value:1.0},	 {name:'辽宁',value:0.3},	 {name:'内蒙',value:0.9},	 {name:'宁夏',value:0.4},	 {name:'青海',value:0.3},	 {name:'山东',value:1.6},	 {name:'山西',value:2.4},	 {name:'陕西',value:68.7},	 {name:'上海',value:0.0},	 {name:'四川',value:2.9},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.2},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.3},	 {name:'浙江',value:1.7},	 {name:'重庆',value:1.4},
+
+                ]
+            }
+        },
+           {
+            name: '上海',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'上海',value:29.3}],	[{name:'北京'}, {name:'上海',value:0.1}],	[{name:'福建'}, {name:'上海',value:3.0}],	[{name:'甘肃'}, {name:'上海',value:1.3}],	[{name:'广东'}, {name:'上海',value:0.6}],	[{name:'广西'}, {name:'上海',value:0.6}],	[{name:'贵州'}, {name:'上海',value:1.7}],	[{name:'海南'}, {name:'上海',value:0.1}],	[{name:'河北'}, {name:'上海',value:0.7}],	[{name:'河南'}, {name:'上海',value:9.4}],	[{name:'黑龙江'}, {name:'上海',value:1.0}],	[{name:'湖北'}, {name:'上海',value:4.4}],	[{name:'湖南'}, {name:'上海',value:2.6}],	[{name:'吉林'}, {name:'上海',value:0.7}],	[{name:'江苏'}, {name:'上海',value:15.3}],	[{name:'江西'}, {name:'上海',value:6.1}],	[{name:'辽宁'}, {name:'上海',value:0.7}],	[{name:'内蒙'}, {name:'上海',value:0.2}],	[{name:'宁夏'}, {name:'上海',value:0.2}],	[{name:'青海'}, {name:'上海',value:0.2}],	[{name:'山东'}, {name:'上海',value:4.6}],	[{name:'山西'}, {name:'上海',value:0.4}],	[{name:'陕西'}, {name:'上海',value:1.4}],	[{name:'上海'}, {name:'上海',value:0.0}],	[{name:'四川'}, {name:'上海',value:7.1}],	[{name:'天津'}, {name:'上海',value:0.1}],	[{name:'西藏'}, {name:'上海',value:0.0}],	[{name:'新疆'}, {name:'上海',value:0.4}],	[{name:'兵团'}, {name:'上海',value:0.0}],	[{name:'云南'}, {name:'上海',value:0.8}],	[{name:'浙江'}, {name:'上海',value:5.1}],	[{name:'重庆'}, {name:'上海',value:2.0}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:29.3},	 {name:'北京',value:0.1},	 {name:'福建',value:3.0},	 {name:'甘肃',value:1.3},	 {name:'广东',value:0.6},	 {name:'广西',value:0.6},	 {name:'贵州',value:1.7},	 {name:'海南',value:0.1},	 {name:'河北',value:0.7},	 {name:'河南',value:9.4},	 {name:'黑龙江',value:1.0},	 {name:'湖北',value:4.4},	 {name:'湖南',value:2.6},	 {name:'吉林',value:0.7},	 {name:'江苏',value:15.3},	 {name:'江西',value:6.1},	 {name:'辽宁',value:0.7},	 {name:'内蒙',value:0.2},	 {name:'宁夏',value:0.2},	 {name:'青海',value:0.2},	 {name:'山东',value:4.6},	 {name:'山西',value:0.4},	 {name:'陕西',value:1.4},	 {name:'上海',value:0.0},	 {name:'四川',value:7.1},	 {name:'天津',value:0.1},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.4},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.8},	 {name:'浙江',value:5.1},	 {name:'重庆',value:2.0},
+
+                ]
+            }
+        },
+           {
+            name: '四川',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'四川',value:0.4}],	[{name:'北京'}, {name:'四川',value:0.0}],	[{name:'福建'}, {name:'四川',value:0.4}],	[{name:'甘肃'}, {name:'四川',value:0.4}],	[{name:'广东'}, {name:'四川',value:0.3}],	[{name:'广西'}, {name:'四川',value:0.1}],	[{name:'贵州'}, {name:'四川',value:0.6}],	[{name:'海南'}, {name:'四川',value:0.0}],	[{name:'河北'}, {name:'四川',value:0.4}],	[{name:'河南'}, {name:'四川',value:0.8}],	[{name:'黑龙江'}, {name:'四川',value:0.1}],	[{name:'湖北'}, {name:'四川',value:1.7}],	[{name:'湖南'}, {name:'四川',value:1.1}],	[{name:'吉林'}, {name:'四川',value:0.1}],	[{name:'江苏'}, {name:'四川',value:0.5}],	[{name:'江西'}, {name:'四川',value:1.1}],	[{name:'辽宁'}, {name:'四川',value:0.1}],	[{name:'内蒙'}, {name:'四川',value:0.1}],	[{name:'宁夏'}, {name:'四川',value:0.0}],	[{name:'青海'}, {name:'四川',value:0.1}],	[{name:'山东'}, {name:'四川',value:0.2}],	[{name:'山西'}, {name:'四川',value:0.2}],	[{name:'陕西'}, {name:'四川',value:0.5}],	[{name:'上海'}, {name:'四川',value:0.0}],	[{name:'四川'}, {name:'四川',value:84.6}],	[{name:'天津'}, {name:'四川',value:0.0}],	[{name:'西藏'}, {name:'四川',value:0.1}],	[{name:'新疆'}, {name:'四川',value:0.1}],	[{name:'兵团'}, {name:'四川',value:0.0}],	[{name:'云南'}, {name:'四川',value:1.5}],	[{name:'浙江'}, {name:'四川',value:0.8}],	[{name:'重庆'}, {name:'四川',value:3.9}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:0.4},	 {name:'北京',value:0.0},	 {name:'福建',value:0.4},	 {name:'甘肃',value:0.4},	 {name:'广东',value:0.3},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.6},	 {name:'海南',value:0.0},	 {name:'河北',value:0.4},	 {name:'河南',value:0.8},	 {name:'黑龙江',value:0.1},	 {name:'湖北',value:1.7},	 {name:'湖南',value:1.1},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.5},	 {name:'江西',value:1.1},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.1},	 {name:'山东',value:0.2},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.5},	 {name:'上海',value:0.0},	 {name:'四川',value:84.6},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.1},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:1.5},	 {name:'浙江',value:0.8},	 {name:'重庆',value:3.9},
+
+                ]
+            }
+        },
+           {
+            name: '天津',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'天津',value:6.3}],	[{name:'北京'}, {name:'天津',value:0.2}],	[{name:'福建'}, {name:'天津',value:1.8}],	[{name:'甘肃'}, {name:'天津',value:1.8}],	[{name:'广东'}, {name:'天津',value:0.3}],	[{name:'广西'}, {name:'天津',value:0.1}],	[{name:'贵州'}, {name:'天津',value:0.4}],	[{name:'海南'}, {name:'天津',value:0.1}],	[{name:'河北'}, {name:'天津',value:17.6}],	[{name:'河南'}, {name:'天津',value:10.8}],	[{name:'黑龙江'}, {name:'天津',value:8.1}],	[{name:'湖北'}, {name:'天津',value:3.1}],	[{name:'湖南'}, {name:'天津',value:0.7}],	[{name:'吉林'}, {name:'天津',value:3.5}],	[{name:'江苏'}, {name:'天津',value:1.2}],	[{name:'江西'}, {name:'天津',value:1.1}],	[{name:'辽宁'}, {name:'天津',value:2.2}],	[{name:'内蒙'}, {name:'天津',value:2.1}],	[{name:'宁夏'}, {name:'天津',value:0.1}],	[{name:'青海'}, {name:'天津',value:0.3}],	[{name:'山东'}, {name:'天津',value:29.3}],	[{name:'山西'}, {name:'天津',value:2.2}],	[{name:'陕西'}, {name:'天津',value:1.6}],	[{name:'上海'}, {name:'天津',value:0.0}],	[{name:'四川'}, {name:'天津',value:2.3}],	[{name:'天津'}, {name:'天津',value:0.0}],	[{name:'西藏'}, {name:'天津',value:0.0}],	[{name:'新疆'}, {name:'天津',value:0.1}],	[{name:'兵团'}, {name:'天津',value:0.0}],	[{name:'云南'}, {name:'天津',value:0.2}],	[{name:'浙江'}, {name:'天津',value:2.0}],	[{name:'重庆'}, {name:'天津',value:0.7}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:6.3},	 {name:'北京',value:0.2},	 {name:'福建',value:1.8},	 {name:'甘肃',value:1.8},	 {name:'广东',value:0.3},	 {name:'广西',value:0.1},	 {name:'贵州',value:0.4},	 {name:'海南',value:0.1},	 {name:'河北',value:17.6},	 {name:'河南',value:10.8},	 {name:'黑龙江',value:8.1},	 {name:'湖北',value:3.1},	 {name:'湖南',value:0.7},	 {name:'吉林',value:3.5},	 {name:'江苏',value:1.2},	 {name:'江西',value:1.1},	 {name:'辽宁',value:2.2},	 {name:'内蒙',value:2.1},	 {name:'宁夏',value:0.1},	 {name:'青海',value:0.3},	 {name:'山东',value:29.3},	 {name:'山西',value:2.2},	 {name:'陕西',value:1.6},	 {name:'上海',value:0.0},	 {name:'四川',value:2.3},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.2},	 {name:'浙江',value:2.0},	 {name:'重庆',value:0.7},
+
+                ]
+            }
+        },
+           {
+            name: '西藏',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'西藏',value:0.7}],	[{name:'北京'}, {name:'西藏',value:0.0}],	[{name:'福建'}, {name:'西藏',value:0.4}],	[{name:'甘肃'}, {name:'西藏',value:7.5}],	[{name:'广东'}, {name:'西藏',value:0.3}],	[{name:'广西'}, {name:'西藏',value:0.2}],	[{name:'贵州'}, {name:'西藏',value:0.5}],	[{name:'海南'}, {name:'西藏',value:0.0}],	[{name:'河北'}, {name:'西藏',value:0.6}],	[{name:'河南'}, {name:'西藏',value:3.4}],	[{name:'黑龙江'}, {name:'西藏',value:0.2}],	[{name:'湖北'}, {name:'西藏',value:1.5}],	[{name:'湖南'}, {name:'西藏',value:1.0}],	[{name:'吉林'}, {name:'西藏',value:0.1}],	[{name:'江苏'}, {name:'西藏',value:0.7}],	[{name:'江西'}, {name:'西藏',value:0.4}],	[{name:'辽宁'}, {name:'西藏',value:0.2}],	[{name:'内蒙'}, {name:'西藏',value:0.1}],	[{name:'宁夏'}, {name:'西藏',value:0.3}],	[{name:'青海'}, {name:'西藏',value:1.9}],	[{name:'山东'}, {name:'西藏',value:0.5}],	[{name:'山西'}, {name:'西藏',value:0.4}],	[{name:'陕西'}, {name:'西藏',value:1.5}],	[{name:'上海'}, {name:'西藏',value:0.0}],	[{name:'四川'}, {name:'西藏',value:40.4}],	[{name:'天津'}, {name:'西藏',value:0.0}],	[{name:'西藏'}, {name:'西藏',value:32.7}],	[{name:'新疆'}, {name:'西藏',value:0.1}],	[{name:'兵团'}, {name:'西藏',value:0.0}],	[{name:'云南'}, {name:'西藏',value:1.2}],	[{name:'浙江'}, {name:'西藏',value:0.5}],	[{name:'重庆'}, {name:'西藏',value:3.1}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:0.7},	 {name:'北京',value:0.0},	 {name:'福建',value:0.4},	 {name:'甘肃',value:7.5},	 {name:'广东',value:0.3},	 {name:'广西',value:0.2},	 {name:'贵州',value:0.5},	 {name:'海南',value:0.0},	 {name:'河北',value:0.6},	 {name:'河南',value:3.4},	 {name:'黑龙江',value:0.2},	 {name:'湖北',value:1.5},	 {name:'湖南',value:1.0},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.7},	 {name:'江西',value:0.4},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.3},	 {name:'青海',value:1.9},	 {name:'山东',value:0.5},	 {name:'山西',value:0.4},	 {name:'陕西',value:1.5},	 {name:'上海',value:0.0},	 {name:'四川',value:40.4},	 {name:'天津',value:0.0},	 {name:'西藏',value:32.7},	 {name:'新疆',value:0.1},	 {name:'兵团',value:0.0},	 {name:'云南',value:1.2},	 {name:'浙江',value:0.5},	 {name:'重庆',value:3.1},
+
+                ]
+            }
+        },
+           {
+            name: '新疆',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'新疆',value:2.7}],	[{name:'北京'}, {name:'新疆',value:0.0}],	[{name:'福建'}, {name:'新疆',value:0.4}],	[{name:'甘肃'}, {name:'新疆',value:13.5}],	[{name:'广东'}, {name:'新疆',value:0.1}],	[{name:'广西'}, {name:'新疆',value:0.2}],	[{name:'贵州'}, {name:'新疆',value:0.3}],	[{name:'海南'}, {name:'新疆',value:0.0}],	[{name:'河北'}, {name:'新疆',value:0.8}],	[{name:'河南'}, {name:'新疆',value:15.5}],	[{name:'黑龙江'}, {name:'新疆',value:0.4}],	[{name:'湖北'}, {name:'新疆',value:1.9}],	[{name:'湖南'}, {name:'新疆',value:1.0}],	[{name:'吉林'}, {name:'新疆',value:0.2}],	[{name:'江苏'}, {name:'新疆',value:1.5}],	[{name:'江西'}, {name:'新疆',value:0.4}],	[{name:'辽宁'}, {name:'新疆',value:0.2}],	[{name:'内蒙'}, {name:'新疆',value:0.1}],	[{name:'宁夏'}, {name:'新疆',value:2.6}],	[{name:'青海'}, {name:'新疆',value:0.6}],	[{name:'山东'}, {name:'新疆',value:2.2}],	[{name:'山西'}, {name:'新疆',value:0.3}],	[{name:'陕西'}, {name:'新疆',value:3.6}],	[{name:'上海'}, {name:'新疆',value:0.1}],	[{name:'四川'}, {name:'新疆',value:12.5}],	[{name:'天津'}, {name:'新疆',value:0.0}],	[{name:'西藏'}, {name:'新疆',value:0.0}],	[{name:'新疆'}, {name:'新疆',value:33.5}],	[{name:'兵团'}, {name:'新疆',value:1.8}],	[{name:'云南'}, {name:'新疆',value:0.3}],	[{name:'浙江'}, {name:'新疆',value:1.1}],	[{name:'重庆'}, {name:'新疆',value:2.4}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:2.7},	 {name:'北京',value:0.0},	 {name:'福建',value:0.4},	 {name:'甘肃',value:13.5},	 {name:'广东',value:0.1},	 {name:'广西',value:0.2},	 {name:'贵州',value:0.3},	 {name:'海南',value:0.0},	 {name:'河北',value:0.8},	 {name:'河南',value:15.5},	 {name:'黑龙江',value:0.4},	 {name:'湖北',value:1.9},	 {name:'湖南',value:1.0},	 {name:'吉林',value:0.2},	 {name:'江苏',value:1.5},	 {name:'江西',value:0.4},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:2.6},	 {name:'青海',value:0.6},	 {name:'山东',value:2.2},	 {name:'山西',value:0.3},	 {name:'陕西',value:3.6},	 {name:'上海',value:0.1},	 {name:'四川',value:12.5},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:33.5},	 {name:'兵团',value:1.8},	 {name:'云南',value:0.3},	 {name:'浙江',value:1.1},	 {name:'重庆',value:2.4},
+
+                ]
+            }
+        },
+           {
+            name: '兵团',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'兵团',value:3.4}],	[{name:'北京'}, {name:'兵团',value:0.1}],	[{name:'福建'}, {name:'兵团',value:0.3}],	[{name:'甘肃'}, {name:'兵团',value:19.5}],	[{name:'广东'}, {name:'兵团',value:0.1}],	[{name:'广西'}, {name:'兵团',value:0.0}],	[{name:'贵州'}, {name:'兵团',value:0.7}],	[{name:'海南'}, {name:'兵团',value:0.0}],	[{name:'河北'}, {name:'兵团',value:0.6}],	[{name:'河南'}, {name:'兵团',value:19.8}],	[{name:'黑龙江'}, {name:'兵团',value:0.2}],	[{name:'湖北'}, {name:'兵团',value:2.1}],	[{name:'湖南'}, {name:'兵团',value:0.9}],	[{name:'吉林'}, {name:'兵团',value:0.2}],	[{name:'江苏'}, {name:'兵团',value:1.1}],	[{name:'江西'}, {name:'兵团',value:0.4}],	[{name:'辽宁'}, {name:'兵团',value:0.2}],	[{name:'内蒙'}, {name:'兵团',value:0.3}],	[{name:'宁夏'}, {name:'兵团',value:1.2}],	[{name:'青海'}, {name:'兵团',value:1.3}],	[{name:'山东'}, {name:'兵团',value:2.3}],	[{name:'山西'}, {name:'兵团',value:0.2}],	[{name:'陕西'}, {name:'兵团',value:3.3}],	[{name:'上海'}, {name:'兵团',value:0.1}],	[{name:'四川'}, {name:'兵团',value:16.5}],	[{name:'天津'}, {name:'兵团',value:0.1}],	[{name:'西藏'}, {name:'兵团',value:0.1}],	[{name:'新疆'}, {name:'兵团',value:17.1}],	[{name:'兵团'}, {name:'兵团',value:1.6}],	[{name:'云南'}, {name:'兵团',value:0.9}],	[{name:'浙江'}, {name:'兵团',value:0.4}],	[{name:'重庆'}, {name:'兵团',value:5.9}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:3.4},	 {name:'北京',value:0.1},	 {name:'福建',value:0.3},	 {name:'甘肃',value:19.5},	 {name:'广东',value:0.1},	 {name:'广西',value:0.0},	 {name:'贵州',value:0.7},	 {name:'海南',value:0.0},	 {name:'河北',value:0.6},	 {name:'河南',value:19.8},	 {name:'黑龙江',value:0.2},	 {name:'湖北',value:2.1},	 {name:'湖南',value:0.9},	 {name:'吉林',value:0.2},	 {name:'江苏',value:1.1},	 {name:'江西',value:0.4},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.3},	 {name:'宁夏',value:1.2},	 {name:'青海',value:1.3},	 {name:'山东',value:2.3},	 {name:'山西',value:0.2},	 {name:'陕西',value:3.3},	 {name:'上海',value:0.1},	 {name:'四川',value:16.5},	 {name:'天津',value:0.1},	 {name:'西藏',value:0.1},	 {name:'新疆',value:17.1},	 {name:'兵团',value:1.6},	 {name:'云南',value:0.9},	 {name:'浙江',value:0.4},	 {name:'重庆',value:5.9},
+
+                ]
+            }
+        },
+           {
+            name: '云南',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'云南',value:1.3}],	[{name:'北京'}, {name:'云南',value:0.0}],	[{name:'福建'}, {name:'云南',value:2.1}],	[{name:'甘肃'}, {name:'云南',value:0.1}],	[{name:'广东'}, {name:'云南',value:0.5}],	[{name:'广西'}, {name:'云南',value:0.5}],	[{name:'贵州'}, {name:'云南',value:5.1}],	[{name:'海南'}, {name:'云南',value:0.0}],	[{name:'河北'}, {name:'云南',value:0.3}],	[{name:'河南'}, {name:'云南',value:1.0}],	[{name:'黑龙江'}, {name:'云南',value:0.4}],	[{name:'湖北'}, {name:'云南',value:3.1}],	[{name:'湖南'}, {name:'云南',value:7.0}],	[{name:'吉林'}, {name:'云南',value:0.2}],	[{name:'江苏'}, {name:'云南',value:0.7}],	[{name:'江西'}, {name:'云南',value:2.6}],	[{name:'辽宁'}, {name:'云南',value:0.3}],	[{name:'内蒙'}, {name:'云南',value:0.0}],	[{name:'宁夏'}, {name:'云南',value:0.0}],	[{name:'青海'}, {name:'云南',value:0.0}],	[{name:'山东'}, {name:'云南',value:0.2}],	[{name:'山西'}, {name:'云南',value:0.2}],	[{name:'陕西'}, {name:'云南',value:0.2}],	[{name:'上海'}, {name:'云南',value:0.0}],	[{name:'四川'}, {name:'云南',value:11.0}],	[{name:'天津'}, {name:'云南',value:0.0}],	[{name:'西藏'}, {name:'云南',value:0.0}],	[{name:'新疆'}, {name:'云南',value:0.0}],	[{name:'兵团'}, {name:'云南',value:0.0}],	[{name:'云南'}, {name:'云南',value:56.5}],	[{name:'浙江'}, {name:'云南',value:2.1}],	[{name:'重庆'}, {name:'云南',value:4.7}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:1.3},	 {name:'北京',value:0.0},	 {name:'福建',value:2.1},	 {name:'甘肃',value:0.1},	 {name:'广东',value:0.5},	 {name:'广西',value:0.5},	 {name:'贵州',value:5.1},	 {name:'海南',value:0.0},	 {name:'河北',value:0.3},	 {name:'河南',value:1.0},	 {name:'黑龙江',value:0.4},	 {name:'湖北',value:3.1},	 {name:'湖南',value:7.0},	 {name:'吉林',value:0.2},	 {name:'江苏',value:0.7},	 {name:'江西',value:2.6},	 {name:'辽宁',value:0.3},	 {name:'内蒙',value:0.0},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.0},	 {name:'山东',value:0.2},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.2},	 {name:'上海',value:0.0},	 {name:'四川',value:11.0},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:56.5},	 {name:'浙江',value:2.1},	 {name:'重庆',value:4.7},
+
+                ]
+            }
+        },
+           {
+            name: '浙江',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'浙江',value:18.9}],	[{name:'北京'}, {name:'浙江',value:0.0}],	[{name:'福建'}, {name:'浙江',value:1.8}],	[{name:'甘肃'}, {name:'浙江',value:0.5}],	[{name:'广东'}, {name:'浙江',value:0.4}],	[{name:'广西'}, {name:'浙江',value:1.0}],	[{name:'贵州'}, {name:'浙江',value:11.4}],	[{name:'海南'}, {name:'浙江',value:0.1}],	[{name:'河北'}, {name:'浙江',value:0.2}],	[{name:'河南'}, {name:'浙江',value:10.4}],	[{name:'黑龙江'}, {name:'浙江',value:0.4}],	[{name:'湖北'}, {name:'浙江',value:5.5}],	[{name:'湖南'}, {name:'浙江',value:5.1}],	[{name:'吉林'}, {name:'浙江',value:0.2}],	[{name:'江苏'}, {name:'浙江',value:2.5}],	[{name:'江西'}, {name:'浙江',value:10.6}],	[{name:'辽宁'}, {name:'浙江',value:0.2}],	[{name:'内蒙'}, {name:'浙江',value:0.1}],	[{name:'宁夏'}, {name:'浙江',value:0.0}],	[{name:'青海'}, {name:'浙江',value:0.1}],	[{name:'山东'}, {name:'浙江',value:1.7}],	[{name:'山西'}, {name:'浙江',value:0.4}],	[{name:'陕西'}, {name:'浙江',value:1.3}],	[{name:'上海'}, {name:'浙江',value:0.1}],	[{name:'四川'}, {name:'浙江',value:8.5}],	[{name:'天津'}, {name:'浙江',value:0.0}],	[{name:'西藏'}, {name:'浙江',value:0.0}],	[{name:'新疆'}, {name:'浙江',value:0.0}],	[{name:'兵团'}, {name:'浙江',value:0.0}],	[{name:'云南'}, {name:'浙江',value:4.2}],	[{name:'浙江'}, {name:'浙江',value:11.0}],	[{name:'重庆'}, {name:'浙江',value:3.2}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:18.9},	 {name:'北京',value:0.0},	 {name:'福建',value:1.8},	 {name:'甘肃',value:0.5},	 {name:'广东',value:0.4},	 {name:'广西',value:1.0},	 {name:'贵州',value:11.4},	 {name:'海南',value:0.1},	 {name:'河北',value:0.2},	 {name:'河南',value:10.4},	 {name:'黑龙江',value:0.4},	 {name:'湖北',value:5.5},	 {name:'湖南',value:5.1},	 {name:'吉林',value:0.2},	 {name:'江苏',value:2.5},	 {name:'江西',value:10.6},	 {name:'辽宁',value:0.2},	 {name:'内蒙',value:0.1},	 {name:'宁夏',value:0.0},	 {name:'青海',value:0.1},	 {name:'山东',value:1.7},	 {name:'山西',value:0.4},	 {name:'陕西',value:1.3},	 {name:'上海',value:0.1},	 {name:'四川',value:8.5},	 {name:'天津',value:0.0},	 {name:'西藏',value:0.0},	 {name:'新疆',value:0.0},	 {name:'兵团',value:0.0},	 {name:'云南',value:4.2},	 {name:'浙江',value:11.0},	 {name:'重庆',value:3.2},
+
+                ]
+            }
+        },
+           {
+            name: '重庆',
+            type: 'map',
+            mapType: 'china',
+            data:[],
+            markLine : {
+                smooth:true,
+                effect : {
+                    show: true,
+                    scaleSize: 1,
+                    period: 30,
+                    color: '#fff',
+                    shadowBlur: 10
+                },
+                itemStyle : {
+                    normal: {
+                        borderWidth:1,
+                        lineStyle: {
+                            type: 'solid',
+                            shadowBlur: 10
+                        }
+                    }
+                },
+                data : [
+[{name:'安徽'}, {name:'重庆',value:0.4}],	[{name:'北京'}, {name:'重庆',value:0.1}],	[{name:'福建'}, {name:'重庆',value:0.6}],	[{name:'甘肃'}, {name:'重庆',value:0.2}],	[{name:'广东'}, {name:'重庆',value:0.4}],	[{name:'广西'}, {name:'重庆',value:0.2}],	[{name:'贵州'}, {name:'重庆',value:1.8}],	[{name:'海南'}, {name:'重庆',value:0.1}],	[{name:'河北'}, {name:'重庆',value:0.5}],	[{name:'河南'}, {name:'重庆',value:0.8}],	[{name:'黑龙江'}, {name:'重庆',value:0.1}],	[{name:'湖北'}, {name:'重庆',value:1.7}],	[{name:'湖南'}, {name:'重庆',value:1.0}],	[{name:'吉林'}, {name:'重庆',value:0.1}],	[{name:'江苏'}, {name:'重庆',value:0.4}],	[{name:'江西'}, {name:'重庆',value:0.5}],	[{name:'辽宁'}, {name:'重庆',value:0.1}],	[{name:'内蒙'}, {name:'重庆',value:0.0}],	[{name:'宁夏'}, {name:'重庆',value:0.1}],	[{name:'青海'}, {name:'重庆',value:0.1}],	[{name:'山东'}, {name:'重庆',value:0.2}],	[{name:'山西'}, {name:'重庆',value:0.2}],	[{name:'陕西'}, {name:'重庆',value:0.5}],	[{name:'上海'}, {name:'重庆',value:0.0}],	[{name:'四川'}, {name:'重庆',value:18.4}],	[{name:'天津'}, {name:'重庆',value:0.1}],	[{name:'西藏'}, {name:'重庆',value:0.2}],	[{name:'新疆'}, {name:'重庆',value:0.4}],	[{name:'兵团'}, {name:'重庆',value:0.0}],	[{name:'云南'}, {name:'重庆',value:0.6}],	[{name:'浙江'}, {name:'重庆',value:0.8}],	[{name:'重庆'}, {name:'重庆',value:69.9}],
+
+
+                ]
+            },
+            markPoint : {
+                symbol:'emptyCircle',
+                symbolSize : function (v){
+                    return 10 + v/10
+                },
+                effect : {
+                    show: true,
+                    shadowBlur : 0
+                },
+                itemStyle:{
+                    normal:{
+                        label:{show:false}
+                    },
+                    emphasis: {
+                        label:{position:'top'}
+                    }
+                },
+                data : [
+ {name:'安徽',value:0.4},	 {name:'北京',value:0.1},	 {name:'福建',value:0.6},	 {name:'甘肃',value:0.2},	 {name:'广东',value:0.4},	 {name:'广西',value:0.2},	 {name:'贵州',value:1.8},	 {name:'海南',value:0.1},	 {name:'河北',value:0.5},	 {name:'河南',value:0.8},	 {name:'黑龙江',value:0.1},	 {name:'湖北',value:1.7},	 {name:'湖南',value:1.0},	 {name:'吉林',value:0.1},	 {name:'江苏',value:0.4},	 {name:'江西',value:0.5},	 {name:'辽宁',value:0.1},	 {name:'内蒙',value:0.0},	 {name:'宁夏',value:0.1},	 {name:'青海',value:0.1},	 {name:'山东',value:0.2},	 {name:'山西',value:0.2},	 {name:'陕西',value:0.5},	 {name:'上海',value:0.0},	 {name:'四川',value:18.4},	 {name:'天津',value:0.1},	 {name:'西藏',value:0.2},	 {name:'新疆',value:0.4},	 {name:'兵团',value:0.0},	 {name:'云南',value:0.6},	 {name:'浙江',value:0.8},	 {name:'重庆',value:69.9},
+
+                ]
+            }
+        },
+
+           
+    ]
+};
+                    
+
+                    
+           
+             
+                	                    
+        
+                // 为echarts对象加载数据 
+                myChart.setOption(option); 
+            }
+        );
+    </script>
+</body>
+</html>
